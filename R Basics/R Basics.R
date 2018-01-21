@@ -23,7 +23,7 @@ variable1 <- 10
 variable2 <- 200
 v3 <- variable1 + variable2
 
-variable1; variable2; v3 # print all 4 variables to console
+variable1; variable2; v3 # print variables to console
 
 #' **Vectors** are objects that store data of the same **class**
 
@@ -41,18 +41,14 @@ c(TRUE, FALSE) # logical (boolean TRUE/FALSE)
 library(tidyverse); library(data.table);library(broom); library(dtplyr); library(cowplot); library(lme4); library(lmerTest); library(ggbeeswarm)
 
 #' # Reading files into R
-#' 
 
+df1 <- read.csv("./Datasets/Orange.csv")
+df2 <- fread("./Datasets/Orange.csv")
+df3 <- tbl_dt(fread("./Datasets/Orange.csv"))
 
-
-
-#' A script comment that includes **markdown** formatting.
-
-
-ggplot(mtcars, aes(cyl, mpg)) +
-    geom_point()
-
-
+df1 # read.csv(csv)
+df2 # fread(csv)
+df3 # tb_dt(fread(csv))
 
 
 # rmarkdown::render("R Basics.R", "github_document")
