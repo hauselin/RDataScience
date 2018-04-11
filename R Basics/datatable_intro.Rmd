@@ -1,0 +1,46 @@
+---
+title: "Intro to data analysis with data.table package"
+output: html_notebook
+---
+
+# data.table magic
+
+Forget about <u>objects</u>, <u>variables</u>, <u>functions</u>, and all that programming jargon. Let's dive straight into data analysis! Before we begin, you need to set up your <u>environment</u> (I'll try to underline all technical terms/jargon the first time I use them). 
+
+```{r set up environment}
+rm(list = ls()) # clear environment
+setwd("/Users/Hause/Dropbox/Working Projects/RDataScience/R Basics/") # set working directory
+library(data.table) # load package
+```
+
+* `rm(list = ls())`: `rm()` is a function to **r**e**m**ove objects in your environment; `ls()` is a function to <u>print</u> the objects in your environment; so if you put `ls()` inside `rm()`, you're basically <u>calling</u> two functions (nested functions) this way: first get me all the objects in the environment (via `ls()`), then remove all of these objects (via `rm()`), hence `rm(list = ls())`
+* `setwd("/Users/Hause/Dropbox/Working Projects/RDataScience/R Basics/")`: sets your <u>current working directory</u>
+
+Ctrl+Shift+H
+
+
+
+R has many built-in datasets. We'll use a few of them along the way. To see what's available, type `data()` in your Console to see them. 
+
+```{r}
+?sleep # 
+dt <- data.table(sleep) 
+class(dt)
+dt
+```
+
+## data.table [i, j, by, .SDcols] 
+
+`data.table` is an extremely flexible and powerful library/package. I think it should be in every data scientist's toolkit; and anyone who analyses data in R should know both `data.table` and `dplyr` (part of `tidyverse`) really well.
+
+`data.table` uses very concise syntax (i.e., the way to express yourself) to perform powerful computations really quickly and flexibly. First, you need to understand its syntax: `data.table [i, j, by, .SDcols]`
+
+* `i`: <u>filter</u> or <u>subset</u> rows/observations
+* `j`: <u>select</u> particular columns/variables and apply any conceivable function to that column (or columns) 
+* `by`: where all the magic happens; applies functions (specified in `j`) separately to different groups in your data
+* `.SDcols`: applies functions (specified in `j`) to only a **s**ubset of the **d**atatable **col**umns
+
+```{r}
+dt
+```
+
