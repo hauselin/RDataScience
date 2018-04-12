@@ -26,10 +26,10 @@ install.packages("cowplot")
 # install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot"))
 ```
 
-Other useful packages I use in my [custom functions](#custorm-r-functions)
+Other useful packages I use in my custom functions (although when you use these functions, they'll try to install these packages if you don't already have them).
 
 ```
-install.packages("piecewiseSEM") 
+install.packages("piecewiseSEM")
 install.packages("compute.es")
 install.packages("sjstats")
 ```
