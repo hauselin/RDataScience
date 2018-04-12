@@ -4,6 +4,8 @@
 
 I use a few R packages regularly. To install all of them, run the following code in R or RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
 
+You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).
+
 ```
 # install one by one
 install.packages("tidyverse")
@@ -15,8 +17,13 @@ install.packages("lmerTest")
 install.packages("ggbeeswarm")
 install.packages("cowplot")
 
-# or install all at once (can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult to understand)
-install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot"))
+# or install all at once
+#' I have commented out (added a # sign in front of a line)
+#' the line of code below so I won't run it accidentally,
+#' or it's to tell myself or others who are reading my code,
+#' that I usually don't intend to run this line of code
+#' unless I really want to.
+# install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot"))
 ```
 
 Then every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once
