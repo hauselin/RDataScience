@@ -1,6 +1,7 @@
 ---
 title: "Intro to data analysis with data.table package"
-output: html_notebook
+# output: html_notebook
+output: html_document
 ---
 
 # data.table magic
