@@ -2,7 +2,7 @@
 
 ### Install R packages
 
-I use a few R packages regularly. To install all of them, run the following code in R or RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
+I use a few R packages regularly. To install all of them, first make sure you have the latest version of R and RStudio. Then to install packages, run the following code in R or RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
 
 You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).
 
@@ -26,7 +26,15 @@ install.packages("cowplot")
 # install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot"))
 ```
 
-Then every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once.
+Other useful packages I use in my [custom functions](#custorm-r-functions)
+
+```
+install.packages("piecewiseSEM")
+install.packages("compute.es")
+install.packages("sjstats")
+```
+
+Every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once.
 
 ```
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
