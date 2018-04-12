@@ -26,7 +26,7 @@ install.packages("cowplot")
 # install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot"))
 ```
 
-Other useful packages I use in my custom functions (although when you use these functions, they'll try to install these packages if you don't already have them).
+Other useful packages I use in my (custom functions)[#custom-r-functions] (although when you use these functions, they'll try to install these packages if you don't already have them).
 
 ```
 install.packages("piecewiseSEM")
