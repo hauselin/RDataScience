@@ -29,7 +29,7 @@ install.packages("cowplot")
 Other useful packages I use in my [custom functions](#custorm-r-functions)
 
 ```
-install.packages("piecewiseSEM")
+install.packages("piecewiseSEM") 
 install.packages("compute.es")
 install.packages("sjstats")
 ```
