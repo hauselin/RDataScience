@@ -1,5 +1,37 @@
 # Data Science with R for Psychologists
 
-R packages
+### Install R packages
+
+I use a few R packages regularly. To install all of them, run the following code in R or RStudio.
+
+```
+# install one by one
+install.packages("tidyverse"); install.packages("data.table"); install.packages("broom"); install.packages("dtplyr"); install.packages("lme4"); install.packages("lmerTest"); install.packages("ggbeeswarm"); install.packages("cowplot")
+
+# or install all at once (can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult to understand)
+install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot"))
+```
+
+These R packages are very powerful and it's worth learning them well.
+
+* [tidyverse](https://www.tidyverse.org/) packages (e.g., dplyr, tidyr, ggplot2, stringr)
+    - manipulate dataframes (and tibbles) easily with tidyr, dplyr
+    - make beautiful plots with clean syntax (ggplot2)
 * [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
-* [tidyverse](https://www.tidyverse.org/) packages (e.g., dplyr, tidyr, ggplot2)
+    - powerful, extremely fast, and simple way to manipulate dataframes/datatables
+* [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
+    - converts model outputs into tidy dataframes
+* [dtplyr](https://github.com/hadley/dtplyr)
+    - `tbl_dt()`function from this package combines the best of tidyverse and data.table packages
+* [lme4](https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r)
+    - fit linear mixed effects models
+* [lmerTest](https://cran.r-project.org/web/packages/lmerTest/index.html)
+    - compute probability values and degrees of freedom for mixed effects models fitted using lme4 package (uses Satterthwaite approximation)
+* [ggbeeswarm](https://github.com/eclarke/ggbeeswarm)
+    - produces beautiful and informative ggplots that show distributions of datapoints
+* [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)
+    - combines multiple ggplots into one plot
+
+### Custom R functions
+
+I have written and adapted many R functions to make my workflow more efficient. Check out my [other github repository](https://github.com/hauselin/Rcode).
