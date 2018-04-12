@@ -26,7 +26,7 @@ install.packages("cowplot")
 # install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot"))
 ```
 
-Then every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once
+Then every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once.
 
 ```
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
