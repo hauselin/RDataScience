@@ -2,17 +2,30 @@
 
 ### Install R packages
 
-I use a few R packages regularly. To install all of them, run the following code in R or RStudio.
+I use a few R packages regularly. To install all of them, run the following code in R or RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
 
 ```
 # install one by one
-install.packages("tidyverse"); install.packages("data.table"); install.packages("broom"); install.packages("dtplyr"); install.packages("lme4"); install.packages("lmerTest"); install.packages("ggbeeswarm"); install.packages("cowplot")
+install.packages("tidyverse")
+install.packages("data.table")
+install.packages("broom")
+install.packages("dtplyr")
+install.packages("lme4")
+install.packages("lmerTest")
+install.packages("ggbeeswarm")
+install.packages("cowplot")
 
 # or install all at once (can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult to understand)
 install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot"))
 ```
 
-These R packages are very powerful and it's worth learning them well.
+Then every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once
+
+```
+library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+```
+
+These R packages above are very powerful and it's worth learning them well.
 
 * [tidyverse](https://www.tidyverse.org/) packages (e.g., dplyr, tidyr, ggplot2, stringr)
     - manipulate dataframes (and tibbles) easily with tidyr, dplyr
@@ -22,7 +35,7 @@ These R packages are very powerful and it's worth learning them well.
 * [broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
     - converts model outputs into tidy dataframes
 * [dtplyr](https://github.com/hadley/dtplyr)
-    - `tbl_dt()`function from this package combines the best of tidyverse and data.table packages
+    - `tbl_dt()` function from this package combines the best of tidyverse and data.table packages
 * [lme4](https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r)
     - fit linear mixed effects models
 * [lmerTest](https://cran.r-project.org/web/packages/lmerTest/index.html)
