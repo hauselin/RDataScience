@@ -1,9 +1,3 @@
----
-title: "Intro to data analysis with data.table package"
-# output: html_notebook
-output: html_document
----
-
 # data.table magic
 
 Forget about <u>objects</u>, <u>variables</u>, <u>functions</u>, and all that programming jargon. Let's dive straight into data analysis! Before we begin each R session, you need to set up your <u>environment</u> (I'll try to underline all technical terms/jargon the first time I use them). 
