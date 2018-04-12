@@ -5,9 +5,13 @@ output: html_notebook
 
 # data.table magic
 
+---
+
 ### set up your RStudio environment
 
 Forget about **objects**, **variables**, **functions**, and all that programming jargon. Let's dive straight into data analysis! Before we begin each R session, you need to set up your **environment** (I'll try to boldface all technical terms/jargon the first time I use them). 
+
+Anytime you need help with a function, type ? in front of the function name and run it in the console. Try tryping these one by one in the Console: `?rm`, `?mean`, `?library`, `?setwd`, `?getwd`
 
 ```{r set up environment}
 rm(list = ls()) # clear environment
@@ -17,9 +21,9 @@ library(data.table) # load packages
 
 Line-by-line detailed explanation
 
-1. `rm(list = ls())`: removes/clears your environment
+1. `rm(list = ls())`: removes/clears ALL objects from your environment
     * `rm()` is a function to **r**e**m**ove objects in your environment
-    * `ls()` is a function to **print** the objects in your environment
+    * `ls()` is a function to **print** or **l**i**s**t the objects in your environment
     * so if you put `ls()` inside `rm()`, you're basically **calling** two functions (nested functions) this way: first get me all the objects in the environment (via `ls()`), then remove all of these objects (via `rm()`), hence `rm(list = ls())`
 2. `setwd("/Users/Hause/Dropbox/Working Projects/RDataScience/R Basics/")`: sets your **current working directory**
     * Use the keyboard shortcut Ctrl+Shift+H to select your working directory with your mouse. When you're done, you should see the `setwd()` line of code printed in your Console. Copy that line of code (without the prompt >) from your Console to your R script.
