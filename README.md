@@ -32,6 +32,7 @@ Other useful packages I use in my [custom functions](#custom-r-functions) (altho
 install.packages("piecewiseSEM")
 install.packages("compute.es")
 install.packages("sjstats")
+install.packages("sjPlot")
 ```
 
 Every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once.
@@ -59,6 +60,7 @@ These R packages above are very powerful and it's worth learning them well.
     - produces beautiful and informative ggplots that show distributions of datapoints
 * [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)
     - combines multiple ggplots into one plot
+* [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)
 
 ### Custom R functions
 
