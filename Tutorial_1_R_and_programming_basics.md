@@ -1,4 +1,4 @@
-Tutorial 1 R and programming basics
+Tutorial 1: R and programming basics
 ================
 
 Tutorial topics:
@@ -88,14 +88,30 @@ setwd("your/path/is/here")
 Getting help via ? or `help()`
 ------------------------------
 
+To get help and read the documentation for any function, use `?` or the `help()` function. Beginners will often find the **Examples** section of the documentation (at the bottom of the document) most useful. Try copying and pasting the code from that section into your script to see how that function works.
+
+Equivalent ways to get help:
+
+``` r
+# get help for mean function
+?mean # I usually use this version because there's less typing
+?mean()
+help(mean)
+
+# get help for setwd function
+?setwd
+?setwd()
+help(setwd)
+```
+
 Variables, objects, and classes
 -------------------------------
 
 Indices and indexing with \[i, j\]
 ----------------------------------
 
-Functions `anyFunctionName()`
------------------------------
+Functions
+---------
 
 Piping with `%>%`
 -----------------
@@ -146,10 +162,12 @@ mean(numbers, na.rm = T) # does this work?
     ## [1] 2
 
 ``` r
-mean(na.rm = T, numbers) # DO NOT DO THIS EVEN IF IT WORK!!! BAD PRACTICE! 
+mean(na.rm = T, numbers) # NEVER DO THIS EVEN IF IT WORKS!!! BAD PRACTICE!!! 
 ```
 
     ## [1] 2
+
+Why is this so bad?
 
 ``` r
 mean(numbers, TRUE) # what happens? why?
