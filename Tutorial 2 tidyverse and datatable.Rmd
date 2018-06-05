@@ -1,0 +1,57 @@
+---
+title: "Tutorial 2: tidyverse and datatable"
+author: Hause Lin
+output: 
+    github_document:
+        toc: true
+        # toc_float: false
+        # theme: lumen
+        # highlight: tango
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r loading packages, results="hide", message=FALSE, warning=FALSE}
+library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+```
+
+## Reading data into R
+
+```{r, results="hide", message=FALSE, warning=FALSE}
+df1 <- read.csv("./Data/Orange.csv") # base R read.csv() function
+# same as df1 <- read.csv("Data/Orange.csv")
+
+df2 <- fread("./Data/Orange.csv") # fread() from library(data.table)
+# same as df2 <- fread("Data/Orange.csv")
+
+# my favorite way of reading data: combining tbl_dt() and fread()
+df3 <- tbl_dt(fread("./Data/Orange.csv")) # tbl_dt() from library(dtplyr)
+# same as df3 <- tbl_dt(fread("Data/Orange.csv"))
+```
+
+## Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))
+
+The `.` in the file path simply refers to the current working directory, so it can be dropped. And `..` can be used to refer to the parent directory.
+
+```{r}
+df1 # read.csv("./Data/Orange.csv")
+```
+
+```{r}
+df2 # fread("./Data/Orange.csv") # fread() from library(data.table)
+```
+
+How's the output different from the one above?
+
+```{r}
+df3 # tbl_dt(fread("./Data/Orange.csv")) # tbl_dt() from library(dtplyr)
+```
+
+How's the output different from the two outputs above?
+
+```{r}
+class(df1) # read.csv("./Data/Orange.csv")
+class(df2) # fread("./Data/Orange.csv") # fread() from library(data.table)
+class(df3) # tbl_dt(fread("./Data/Orange.csv")) # tbl_dt() from library(dtplyr)
+```
+
