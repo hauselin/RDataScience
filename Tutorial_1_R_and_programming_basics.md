@@ -1,14 +1,22 @@
 Tutorial 1: R and programming basics
 ================
+Hause Lin
 
-Tutorial topics:
-
--   Installing and using R packages/libraries
--   Programming basics: directories, objects and variables, indexing, functions, piping, classes, keyboard shortcuts
--   Getting help via ?
--   Functions and function argument order
--   Good practices
--   Four-step philosophy
+-   [What is data science?](#what-is-data-science)
+-   [Installing R packages/libraries `install.packages()`](#installing-r-packageslibraries-install.packages)
+-   [Using/loading R packages when you begin a new RStudio session `library()`](#usingloading-r-packages-when-you-begin-a-new-rstudio-session-library)
+-   [Working/current directory: Where are you and where should you be? `getwd()`](#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd)
+    -   [Two ways to change/set your working directory (both uses `setwd()`).](#two-ways-to-changeset-your-working-directory-both-uses-setwd.)
+-   [Getting help via ? or `help()`](#getting-help-via-or-help)
+-   [Objects, variables, and classes](#objects-variables-and-classes)
+-   [Indices and indexing with \[i, j\]](#indices-and-indexing-with-i-j)
+-   [Functions](#functions)
+-   [Piping with `%>%`](#piping-with)
+-   [Functions and argument order](#functions-and-argument-order)
+-   [Pressing Tab key to autocomplete! Tab will be your best friend!](#pressing-tab-key-to-autocomplete-tab-will-be-your-best-friend)
+-   [Good practices for reproducible research](#good-practices-for-reproducible-research)
+-   [Four-step philosophy](#four-step-philosophy)
+-   [Common beginner errors](#common-beginner-errors)
 
 What is data science?
 ---------------------
