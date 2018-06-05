@@ -17,9 +17,12 @@ library(tidyverse); library(data.table); library(broom); library(dtplyr); librar
 
 ## Reading data into R
 
+Read file in a directory and save the data as an object in the environment by using the assignment `<-` operator. 
+
 ```{r, results="hide", message=FALSE, warning=FALSE}
 df1 <- read.csv("./Data/sleep.csv") # base R read.csv() function
 # same as df1 <- read.csv("Data/sleep.csv")
+# READ: assign the output read.csv("Data/sleep.csv") into df1
 
 df2 <- fread("./Data/sleep.csv") # fread() from library(data.table)
 # same as df2 <- fread("Data/sleep.csv")
@@ -29,9 +32,9 @@ df3 <- tbl_dt(fread("./Data/sleep.csv")) # tbl_dt() from library(dtplyr)
 # same as df3 <- tbl_dt(fread("Data/sleep.csv"))
 ```
 
-## Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))
-
 The `.` in the file path simply refers to the current working directory, so it can be dropped. And `..` can be used to refer to the parent directory.
+
+## Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))
 
 ```{r}
 df1 # read.csv("./Data/sleep.csv")

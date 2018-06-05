@@ -8,6 +8,7 @@ Hause Lin
 -   [Working/current directory: Where are you and where should you be? `getwd()`](#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd)
     -   [Two ways to change/set your working directory (both uses `setwd()`).](#two-ways-to-changeset-your-working-directory-both-uses-setwd.)
 -   [Getting help via ? or `help()`](#getting-help-via-or-help)
+    -   [Which package does a function come from?](#which-package-does-a-function-come-from)
 -   [Objects, variables, and classes](#objects-variables-and-classes)
 -   [Indices and indexing with \[i, j\]](#indices-and-indexing-with-i-j)
 -   [Using functions](#using-functions)
@@ -111,6 +112,53 @@ help(mean)
 ?setwd()
 help(setwd)
 ```
+
+### Which package does a function come from?
+
+If you ask for help using `?` or `help()`, at the top left corner of the documentation, you'll see something that looks like `functionName{anotherName}`, the name within the `{}` tells you which package a particular function comes from.
+
+``` r
+?lm # linear regression, lm{stats}, so comes from stats package (which comes with R)
+?mean # mean, mean{base}, so comes from base package (which comes with R)
+```
+
+To explicitly specify which package to use, you can use the code below. Often we don't have to explicitly specify which package unless different packages have functions with the same names.
+
+``` r
+mean(c(1, 2, 3))
+```
+
+    ## [1] 2
+
+``` r
+base::mean(c(1, 2, 3)) # same as above but explicitly specifies the base package
+```
+
+    ## [1] 2
+
+``` r
+lm(mpg ~ cyl, data = mtcars)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = mpg ~ cyl, data = mtcars)
+    ## 
+    ## Coefficients:
+    ## (Intercept)          cyl  
+    ##      37.885       -2.876
+
+``` r
+stats::lm(mpg ~ cyl, data = mtcars) # same as above but explicitly specifies the stats package
+```
+
+    ## 
+    ## Call:
+    ## stats::lm(formula = mpg ~ cyl, data = mtcars)
+    ## 
+    ## Coefficients:
+    ## (Intercept)          cyl  
+    ##      37.885       -2.876
 
 Objects, variables, and classes
 -------------------------------
@@ -272,6 +320,33 @@ class(sleep)
 ```
 
     ## [1] "data.frame"
+
+Booleans (class called "logical"): `TRUE` or `FALSE` values. `TRUE` is actually coded as 1 and `FALSE` coded as 0. Must be all upper-case (`TRUE`, `T`, `FALSE`, `F`). Lower-case doesn't work!
+
+``` r
+booleanExample <- c(T, F)
+class(booleanExample) # true
+```
+
+    ## [1] "logical"
+
+``` r
+class(c(TRUE, FALSE))
+```
+
+    ## [1] "logical"
+
+``` r
+class(F) # false
+```
+
+    ## [1] "logical"
+
+``` r
+class(c(T, F))
+```
+
+    ## [1] "logical"
 
 Indices and indexing with \[i, j\]
 ----------------------------------
@@ -539,7 +614,7 @@ Common beginner errors
 
 -   Not looking at the output in the console (treating R like a black box)
 -   Console still expects more code: + rather than &gt; (press Escape to get rid of +)
--   Naming your variables wrongly and calling the wrong variable because of typos
+-   Naming your variables unsystematically and calling the wrong variable because of typos
 -   Not knowing what data you’re giving a function
 -   Not knowing what class of data a function expects
 -   Not knowing what class of data your function returns

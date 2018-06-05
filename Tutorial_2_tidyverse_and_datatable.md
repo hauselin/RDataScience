@@ -6,8 +6,6 @@ Hause Lin
 -   [Comparing the outputs of read.csv(x), fread(x), and tbl\_dt(fread(x))](#comparing-the-outputs-of-read.csvx-freadx-and-tbl_dtfreadx)
     -   [Reading URLs and other formats](#reading-urls-and-other-formats)
 
-![Caption for the picture.](./Images/long_to_wide.png)
-
 ``` r
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
@@ -15,9 +13,12 @@ library(tidyverse); library(data.table); library(broom); library(dtplyr); librar
 Reading data into R
 -------------------
 
+Read file in a directory and save the data as an object in the environment by using the assignment `<-` operator.
+
 ``` r
 df1 <- read.csv("./Data/sleep.csv") # base R read.csv() function
 # same as df1 <- read.csv("Data/sleep.csv")
+# READ: assign the output read.csv("Data/sleep.csv") into df1
 
 df2 <- fread("./Data/sleep.csv") # fread() from library(data.table)
 # same as df2 <- fread("Data/sleep.csv")
@@ -27,10 +28,10 @@ df3 <- tbl_dt(fread("./Data/sleep.csv")) # tbl_dt() from library(dtplyr)
 # same as df3 <- tbl_dt(fread("Data/sleep.csv"))
 ```
 
+The `.` in the file path simply refers to the current working directory, so it can be dropped. And `..` can be used to refer to the parent directory.
+
 Comparing the outputs of read.csv(x), fread(x), and tbl\_dt(fread(x))
 ---------------------------------------------------------------------
-
-The `.` in the file path simply refers to the current working directory, so it can be dropped. And `..` can be used to refer to the parent directory.
 
 ``` r
 df1 # read.csv("./Data/sleep.csv")

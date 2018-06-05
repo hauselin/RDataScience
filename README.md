@@ -16,7 +16,7 @@ After installing both R and RStudio, run RStudio. We usually never R itself and 
 
 ## Installing R packages
 
-I use a few R packages regularly. To install all of them, first make sure you have the latest version of R and RStudio. Then to install packages, run the following code in R or RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
+I use a few R packages regularly. To install all of them, first make sure you have the latest version of R and RStudio. Then to install packages, run the following code in RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
 
 You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).
 

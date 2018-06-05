@@ -98,6 +98,26 @@ help(mean)
 help(setwd)
 ```
 
+### Which package does a function come from?
+
+If you ask for help using `?` or `help()`, at the top left corner of the documentation, you'll see something that looks like `functionName{anotherName}`, the name within the `{}` tells you which package a particular function comes from.
+
+```{r}
+?lm # linear regression, lm{stats}, so comes from stats package (which comes with R)
+?mean # mean, mean{base}, so comes from base package (which comes with R)
+```
+
+To explicitly specify which package to use, you can use the code below. Often we don't have to explicitly specify which package unless different packages have functions with the same names.
+
+```{r}
+mean(c(1, 2, 3))
+base::mean(c(1, 2, 3)) # same as above but explicitly specifies the base package
+
+lm(mpg ~ cyl, data = mtcars)
+stats::lm(mpg ~ cyl, data = mtcars) # same as above but explicitly specifies the stats package
+```
+
+
 ## Objects, variables, and classes
 
 Objects are 'things' in your environment. Just like physical objects (e.g., jeans, frying pan) in your physical environment. Different objects have different properties, and thus belong to different categories/classes: jeans belong to clothes and frying pan belongs to utensils. Same with programming language objects: different objects in your environment belong to different categories/classes (often also known as type). And different categories/classes have different properties associated with them. You wear your jeans but not your frying pan; you can fry eggs with your pan but not your jeans. Same with different programming objects, which includes **vectors, lists, dataframes, datatables, matrices, characters (also known as strings), numerics, integers, booleans** (and the list goes on).
@@ -183,6 +203,17 @@ sleep # dataframe that is built into R (comes with any R installation)
 ```{r}
 class(sleep)
 ```
+
+Booleans (class called "logical"): `TRUE` or `FALSE` values. `TRUE` is actually coded as 1 and `FALSE` coded as 0. Must be all upper-case (`TRUE`, `T`, `FALSE`, `F`). Lower-case doesn't work!
+
+```{r}
+booleanExample <- c(T, F)
+class(booleanExample) # true
+class(c(TRUE, FALSE))
+class(F) # false
+class(c(T, F))
+```
+
 
 ## Indices and indexing with [i, j]
 
@@ -379,7 +410,7 @@ Be creative! Tab and autocomplete works in MANY other situations! Explore! (vari
 
 * Not looking at the output in the console (treating R like a black box)
 * Console still expects more code: + rather than > (press Escape to get rid of +)
-* Naming your variables wrongly and calling the wrong variable because of typos
+* Naming your variables unsystematically and calling the wrong variable because of typos
 * Not knowing what data you’re giving a function
 * Not knowing what class of data a function expects
 * Not knowing what class of data your function returns
