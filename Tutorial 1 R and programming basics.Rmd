@@ -45,7 +45,7 @@ install.packages("sjstats")
 install.packages("sjPlot")
 ```
 
-Install packages all at once, calling `install.packages()` function just once. 
+Or install packages all at once, calling `install.packages()` function just once. 
 
 ```{r installing packages2, eval=FALSE}
 install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
@@ -55,7 +55,7 @@ install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTe
 
 Use `library()` to load packages and use semi-colon (;) to load multiple packages in the same line. I always load the packages below whenever I start a new RStudio session. Sometimes you'll see people using `require()` instead of `library()`. Both works!
 
-```{r loading packages, results="hide"}
+```{r loading packages, results="hide", message=FALSE, warning=FALSE}
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
 
