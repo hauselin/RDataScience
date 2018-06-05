@@ -47,7 +47,7 @@ install.packages("sjPlot")
 
 Install packages all at once, calling `install.packages()` function just once. 
 
-```{r installing packages2, include=FALSE, eval=FALSE}
+```{r installing packages2, eval=FALSE}
 install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
 ```
 

@@ -45,6 +45,10 @@ install.packages("sjPlot")
 
 Install packages all at once, calling `install.packages()` function just once.
 
+``` r
+install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
+```
+
 Using/loading R packages when you begin a new RStudio session `library()`
 -------------------------------------------------------------------------
 
