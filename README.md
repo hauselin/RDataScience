@@ -6,7 +6,7 @@ Download R [here](https://www.r-project.org/). Follow the instructions under **G
 
 * R is a programming language and an environment. It doesn't look too good and isn't too user-friendly. We generally use RStudio as a pretty and user-friendly interface to R.
 
-Download RStudio [here](https://www.rstudio.com/products/rstudio/download/). 
+Download RStudio [here](https://www.rstudio.com/products/rstudio/download/) (the FREE version). 
 
 After installing both R and RStudio, run RStudio. We usually never R itself and always run RStudio (RStudio relies on R). R is like your new but empty home (without furnitures and quite unlivable unless you're a real minimalist) and RStudio are like furniture and decorations added to your house (R), making your house much more livable and even pretty. Thus, RStudio is useless without R, just like furniture and decorations are useless if you don't already have a house. 
 
