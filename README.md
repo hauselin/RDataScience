@@ -1,7 +1,5 @@
 # Data Science with R for Psychologists
 
-[TOC]
-
 ## Installing (or updating) R and RStudio
 
 Download R [here](https://www.r-project.org/). Follow the instructions under **Getting Started** to download R. Choose a mirror/location that is closest to you and download R for Linux, Mac, or Windows.
