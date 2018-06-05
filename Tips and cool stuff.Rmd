@@ -1,0 +1,20 @@
+---
+title: "Tips and cool stuff"
+author: Hause Lin
+output: 
+    github_document:
+        toc: true
+        # toc_float: false
+        # theme: lumen
+        # highlight: tango
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r loading packages, results="hide", message=FALSE, warning=FALSE}
+library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+```
+
+![Long to wide form](./Images/long_to_wide.png)
+
+
