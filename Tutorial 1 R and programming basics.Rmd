@@ -11,6 +11,8 @@ editor_options:
   chunk_output_type: inline
 ---
 
+sdfadsf
+
 ## What is data science?
 
 * Cleaning, wrangling, and munging data
