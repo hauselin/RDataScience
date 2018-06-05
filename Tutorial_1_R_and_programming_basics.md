@@ -1,20 +1,31 @@
 Tutorial 1 R and programming basics
 ================
 
-Data science
-------------
+Tutorial topics:
+
+-   Installing and using R packages/libraries
+-   Programming basics: directories, objects and variables, indexing, functions, piping, classes, keyboard shortcuts
+-   Getting help via ?
+-   Functions and function argument order
+-   Good practices
+-   Four-step philosophy
+
+What is data science?
+---------------------
 
 -   Cleaning, wrangling, and munging data
 -   Summarizing and visualizing data
 -   Fitting models to data
 -   Evaluating fitted models
 
-Installing R packages/libraries
--------------------------------
+Installing R packages/libraries `install.packages()`
+----------------------------------------------------
 
 Use the `install.packages()` function to install packages from CRAN (The Comprehensive R Archive Network), which hosts official releases of different packages (also known as libraries) written by R users (people like you and I can write these packages).
 
 Install packages once and you'll have them on your computer. You only need to update them regularly in the future. No need to rerun `install.packages()` every time you want to use these packages.
+
+Installing packages one by one.
 
 ``` r
 # install one by one
@@ -30,18 +41,16 @@ install.packages("piecewiseSEM")
 install.packages("compute.es")
 install.packages("sjstats")
 install.packages("sjPlot")
+```
 
-# or install all at once
-#' I have commented out (added a # sign in front of a line)
-#' the line of code below so I won't run it accidentally,
-#' or it's to tell myself or others who are reading my code,
-#' that I usually don't intend to run this line of code
-#' unless I really want to.
+Install packages all at once, calling `install.packages()` function just once.
+
+``` r
 install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
 ```
 
-Using/loading R packages when you begin a new RStudio session
--------------------------------------------------------------
+Using/loading R packages when you begin a new RStudio session `library()`
+-------------------------------------------------------------------------
 
 Use `library()` to load packages and use semi-colon (;) to load multiple packages in the same line. I always load the packages below whenever I start a new RStudio session. Sometimes you'll see people using `require()` instead of `library()`. Both works!
 
@@ -49,8 +58,8 @@ Use `library()` to load packages and use semi-colon (;) to load multiple package
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
 
-Working/current directory: Where are you and where should you be?
------------------------------------------------------------------
+Working/current directory: Where are you and where should you be? `getwd()`
+---------------------------------------------------------------------------
 
 The **working directory** (also known as current directory) is the folder (also known as directory) you're currently in. If you're navigating your computer with your mouse, you'll be clicking and moving into different folders. Directory is just a different way of saying 'location' or where you're at right now (which folder you're currently in).
 
@@ -64,7 +73,7 @@ The path above tells you where your working directory is now. It's conceptually 
 
 To change your working directory (to where your project folder is located), use the `setwd()`. This function is easy to use, but the difficulty for most beginners is getting the path to your folder (e.g., "/Users/Hause/Dropbox/Working Projects/RDataScience") so you can specify something like `setwd("/Users/Hause/Dropbox/Working Projects/RDataScience")`.
 
-#### Two ways to change/set your working directory.
+### Two ways to change/set your working directory (both uses `setwd()`).
 
 1.  Go to your menubar (at the top). Click **Help** and search for **set working directory**. RStudio will tell you how to do it via the **Session** menu. Select **Set Working Directory** and **Choose Directory**. Then navigate to your project directory and you're done.
 
@@ -76,11 +85,95 @@ Whether you choose method 1 or 2, you should see your new directory being set in
 setwd("your/path/is/here")
 ```
 
-Good practices
---------------
+Getting help via ? or `help()`
+------------------------------
+
+Variables, objects, and classes
+-------------------------------
+
+Indices and indexing with \[i, j\]
+----------------------------------
+
+Functions `anyFunctionName()`
+-----------------------------
+
+Piping with `%>%`
+-----------------
+
+Functions and argument order
+----------------------------
+
+Make sure to specify your function arguments in the correct order. If not, make sure to specify the name of each argument you're using!
+
+``` r
+numbers <- c(1:3, NA)
+numbers
+```
+
+    ## [1]  1  2  3 NA
+
+Argument-value pairs: argument is x, value is `numbers` (defined above as 1, 2, 3, NA)
+
+``` r
+mean(x = numbers) # what happened?
+```
+
+    ## [1] NA
+
+Argument-value pairs
+
+-   argument1 = x, value = `numbers`
+-   argument2 = na.rm, value = `TRUE`
+
+``` r
+mean(x = numbers, na.rm = TRUE) # remove missing (NA) values by giving the value TRUE to the na.rm argument
+```
+
+    ## [1] 2
+
+Note that `TRUE` can be written simply as `T` and `FALSE` can be written as `F`.
+
+``` r
+mean(na.rm = T, x = numbers) # does this work?
+```
+
+    ## [1] 2
+
+``` r
+mean(numbers, na.rm = T) # does this work?
+```
+
+    ## [1] 2
+
+``` r
+mean(na.rm = T, numbers) # DO NOT DO THIS EVEN IF IT WORK!!! BAD PRACTICE! 
+```
+
+    ## [1] 2
+
+``` r
+mean(numbers, TRUE) # what happens? why?
+```
+
+    ## Error in mean.default(numbers, TRUE): 'trim' must be numeric of length one
+
+The function fails to run. Why? Type `?mean` in the console and read the documentation to figure out why. What arguments do the `mean` function also have? What's the expected order of the arguments?
+
+What are the default values to the arguments? How do you know if there are default values?
+
+Good practices for reproducible research
+----------------------------------------
 
 -   One directory/folder per project
 -   Clear your environment and set your working directory at the top of each script
 -   Load your libraries at the top of each script
 -   Save and restore your work with `save.image()` and `load()`
 -   Give your variables and objects sensible names
+
+Four-step philosophy
+--------------------
+
+1.  Know your subgoals and especially your end goals
+2.  Know what you’re passing in to functions
+3.  Know what your functions return you
+4.  Know how to verify or summarize what your functions return you
