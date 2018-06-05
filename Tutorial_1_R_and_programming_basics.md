@@ -10,15 +10,13 @@ Hause Lin
 -   [Getting help via ? or `help()`](#getting-help-via-or-help)
 -   [Objects, variables, and classes](#objects-variables-and-classes)
 -   [Indices and indexing with \[i, j\]](#indices-and-indexing-with-i-j)
--   [Functions](#functions)
+-   [Using functions](#using-functions)
 -   [Piping with `%>%`](#piping-with)
 -   [Functions and argument order](#functions-and-argument-order)
 -   [Pressing Tab key to autocomplete! Tab will be your best friend!](#pressing-tab-key-to-autocomplete-tab-will-be-your-best-friend)
 -   [Good practices for reproducible research](#good-practices-for-reproducible-research)
 -   [Four-step philosophy](#four-step-philosophy)
 -   [Common beginner errors](#common-beginner-errors)
-
-sdfadsf
 
 What is data science?
 ---------------------
@@ -313,8 +311,8 @@ exampleMatrix[2, 1]
 
     ## [1] 20
 
-Functions
----------
+Using functions
+---------------
 
 Functions take some input, transform that input, and spits out (returns you) some output.
 
@@ -339,6 +337,24 @@ matrix(c(10, 20, 30, 40, 50, 60), nrow = 6)
     ## [4,]   40
     ## [5,]   50
     ## [6,]   60
+
+``` r
+paste0(c("a", "b", "c"), 1:3) # what is the paste0 function doing?
+```
+
+    ## [1] "a1" "b2" "c3"
+
+``` r
+paste(c("a", "b", "c"), 1:3) # How is paste() different from paste0() above?
+```
+
+    ## [1] "a 1" "b 2" "c 3"
+
+``` r
+paste(c("a", "b", "c"), 1:3, sep = '_ _ _') # What's happening?
+```
+
+    ## [1] "a_ _ _1" "b_ _ _2" "c_ _ _3"
 
 Piping with `%>%`
 -----------------
