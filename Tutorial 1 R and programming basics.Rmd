@@ -2,11 +2,11 @@
 title: "Tutorial 1: R and programming basics"
 author: Hause Lin
 output: 
-    html_document:
+    github_document:
         toc: true
-        toc_float: false
-        theme: lumen
-        highlight: tango
+        # toc_float: false
+        # theme: lumen
+        # highlight: tango
 editor_options: 
   chunk_output_type: inline
 ---
