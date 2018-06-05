@@ -1,6 +1,22 @@
 # Data Science with R for Psychologists
 
-### Install R packages
+[TOC]
+
+## Installing (or updating) R and RStudio
+
+Download R [here](https://www.r-project.org/). Follow the instructions under **Getting Started** to download R. Choose a mirror/location that is closest to you and download R for Linux, Mac, or Windows.
+
+* R is a programming language and an environment. It doesn't look too good and isn't too user-friendly. We generally use RStudio as a pretty and user-friendly interface to R.
+
+Download RStudio [here](https://www.rstudio.com/products/rstudio/download/). 
+
+After installing both R and RStudio, run RStudio. We usually never R itself and always run RStudio (RStudio relies on R). R is like your new but empty home (without furnitures and quite unlivable unless you're a real minimalist) and RStudio are like furniture and decorations added to your house (R), making your house much more livable and even pretty. Thus, RStudio is useless without R, just like furniture and decorations are useless if you don't already have a house. 
+
+**Updating R and RStudio once every few months**
+
+* You should check whether there are newer versions of R and RStudio at least once every few months and install them if available. It's good practice to always use the latest versions. Just go to their websites and download and re-install them again. 
+
+## Installing R packages
 
 I use a few R packages regularly. To install all of them, first make sure you have the latest version of R and RStudio. Then to install packages, run the following code in R or RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
 
@@ -9,8 +25,6 @@ You can install one package at a time or multiple at once. I suggest installing 
 ```
 # install packages all at once using c()
 install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
-
-
 
 # install one by one
 #' I have commented out (added a # sign in front of a line)
@@ -61,6 +75,6 @@ These R packages above are very powerful and it's worth learning them well.
     - combines multiple ggplots into one plot
 * [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)
 
-### Custom R functions
+## My custom R functions
 
 I have written and adapted many R functions to make my workflow more efficient. Check out my [other github repository](https://github.com/hauselin/Rcode).
