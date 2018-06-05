@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 1 R and programming basics"
+title: "Tutorial 1: R and programming basics"
 output: github_document
 editor_options: 
   chunk_output_type: inline
@@ -85,6 +85,22 @@ setwd("your/path/is/here")
 
 ## Getting help via ? or `help()`
 
+To get help and read the documentation for any function, use `?` or the `help()` function. Beginners will often find the **Examples** section of the documentation (at the bottom of the document) most useful. Try copying and pasting the code from that section into your script to see how that function works. 
+
+Equivalent ways to get help:
+
+```{r, eval=FALSE}
+# get help for mean function
+?mean # I usually use this version because there's less typing
+?mean()
+help(mean)
+
+# get help for setwd function
+?setwd
+?setwd()
+help(setwd)
+```
+
 ## Variables, objects, and classes
 
 ## Indices and indexing with [i, j]
@@ -128,8 +144,10 @@ mean(numbers, na.rm = T) # does this work?
 ```
 
 ```{r}
-mean(na.rm = T, numbers) # DO NOT DO THIS EVEN IF IT WORK!!! BAD PRACTICE! 
+mean(na.rm = T, numbers) # NEVER DO THIS EVEN IF IT WORKS!!! BAD PRACTICE!!! 
 ```
+
+Why is this so bad?
 
 ```{r, error=TRUE}
 mean(numbers, TRUE) # what happens? why?
