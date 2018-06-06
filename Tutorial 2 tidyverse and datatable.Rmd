@@ -19,7 +19,7 @@ library(tidyverse); library(data.table); library(broom); library(dtplyr); librar
 
 Read file in a directory and save the data as an object in the environment by using the assignment `<-` operator. 
 
-```{r, results="hide", message=FALSE, warning=FALSE}
+```{r read data, results="hide", message=FALSE, warning=FALSE}
 df1 <- read.csv("./Data/sleep.csv") # base R read.csv() function
 # same as df1 <- read.csv("Data/sleep.csv")
 # READ: assign the output read.csv("Data/sleep.csv") into df1
@@ -65,4 +65,84 @@ Most of these read functions can import/read different types of files (e.g., csv
 df_url <- tbl_dt(fread("https://raw.githubusercontent.com/hauselin/RDataScience/master/Data/sleep.csv"))
 df_url # print data to console; same dataset as tbl_dt(fread("./Data/sleep.csv"))
 ```
+
+## Summarizing objects
+
+You can summarize objects quickly by using `summary()`, `str()`, `glimpse()`, or `print(x, n)`.
+
+To view the first/last few items of an object, use `head()` or `tail()`.
+
+```{r}
+summary(df1) # we use summary() for many many other purposes
+str(df1) 
+glimpse(df1)
+head(df1)
+head(df3, n = 3) # what does this do?
+tail(df3, n = 2)
+print(df3, n = Inf) # Inf is infinte (so print all rows)
+```
+
+Use pipes `%>%` to summarize objects
+
+```{r}
+df3 %>% head(n = 2)
+df3 %>% head(2) # why does this work?
+df3 %>% print(Inf)
+df3 %>% summary() # does this work? why?
+```
+
+Datatables and `dplyr`'s data_frame are much better because they tell us the class of each variable at the top when you print the object in the console. They also tell you the dimensions of your data.
+
+```{r}
+df3 # data_frame (dplyr) + data.table + tibble
+```
+
+## Using `$` and `[]` to extract elements using their names. 
+
+```{r} 
+names(df3)
+df3$extra # extracts column/variable as a vector
+df3$group
+df3$ID
+```
+
+```{r}
+myList <- list(a = -999, b = c(TRUE, FALSE, T, T), c = c('myAmazingList')) # create a list with named items a, b, c
+class(myList)
+names(myList) 
+myList # note the formatting/structure of a list ($ signs tell you how to extract items)
+myList$a
+myList$b # lists can store objects of different classes (unlike most other objects, which expect all items to be of same class)
+myList$c
+```
+
+```{r}
+df1['extra'] # same as df$extra, but uses characters (in '') to extract elements
+```
+
+** BUT the syntax above only works for the `data.frame` class!**
+
+```{r, error=TRUE}
+df3['extra'] # fails!!!
+```
+
+If it's a `data.table` class, you do it differently (so know the classes of your objects)! More on `data.table` later on.
+
+```{r}
+df3[, extra] # df3[i, j] (i is row, and j is column)
+```
+
+## tidyverse: a collection of R packages
+
+[tidyverse:](https://www.tidyverse.org/packages/)
+
+>  The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. 
+
+Included packages: `ggplot2`, `dplyr`, `tidyr`, `stringr` etc. [see official website for documentation](https://www.tidyverse.org/packages/)
+
+```{r}
+library(tidyverse)
+```
+
+## Supercharging your workflow with data.table()
 

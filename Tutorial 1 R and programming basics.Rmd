@@ -78,6 +78,8 @@ getwd() # this function prints in the console your current working directory (ge
 
 The path above tells you where your working directory is now. It's conceptually equivalent to you opening a window and using your mouse to manually navigate to that folder. 
 
+The `[1]` in the output refers to the element number of your output.
+
 To change your working directory (to where your project folder is located), use the `setwd()`. This function is easy to use, but the difficulty for most beginners is getting the path to your folder (e.g., "/Users/Hause/Dropbox/Working Projects/RDataScience") so you can specify something like `setwd("/Users/Hause/Dropbox/Working Projects/RDataScience")`.
 
 ### Two ways to change/set your working directory (both uses `setwd()`).
