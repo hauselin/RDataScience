@@ -20,7 +20,7 @@ I use a few R packages regularly (especially in my [custom functions](https://gi
 
 You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).
 
-Comments are preceded by the # symbol in R, and you can use # or #' for multi-line comments. R won't 
+Comments are preceded by the # symbol in R, and you can use # or #' for multi-line comments. R won't run any code that's preceded by the # symbol.
 
 ```
 # install packages all at once using c(), which allows you to combine/concatenate stuff
