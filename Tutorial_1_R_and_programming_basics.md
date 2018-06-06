@@ -3,8 +3,9 @@ Tutorial 1: R and programming basics
 Hause Lin
 
 -   [What is data science?](#what-is-data-science)
--   [Installing R packages/libraries `install.packages()`](#installing-r-packageslibraries-install.packages)
+-   [Setting up: Installing R packages/libraries `install.packages()`](#setting-up-installing-r-packageslibraries-install.packages)
 -   [Using/loading R packages when you begin a new RStudio session `library()`](#usingloading-r-packages-when-you-begin-a-new-rstudio-session-library)
+-   [Changing R default option settings](#changing-r-default-option-settings)
 -   [Working/current directory: Where are you and where should you be? `getwd()`](#workingcurrent-directory-where-are-you-and-where-should-you-be-getwd)
     -   [Two ways to change/set your working directory (both uses `setwd()`).](#two-ways-to-changeset-your-working-directory-both-uses-setwd.)
 -   [Getting help via ? or `help()`](#getting-help-via-or-help)
@@ -27,12 +28,14 @@ What is data science?
 -   Fitting models to data
 -   Evaluating fitted models
 
-Installing R packages/libraries `install.packages()`
-----------------------------------------------------
+Setting up: Installing R packages/libraries `install.packages()`
+----------------------------------------------------------------
 
 Use the `install.packages()` function to install packages from CRAN (The Comprehensive R Archive Network), which hosts official releases of different packages (also known as libraries) written by R users (people like you and I can write these packages).
 
 Install packages once and you'll have them on your computer. You only need to update them regularly in the future. No need to rerun `install.packages()` every time you want to use these packages.
+
+For more information, see [here](https://github.com/hauselin/RDataScience).
 
 Installing packages one by one.
 
@@ -52,7 +55,7 @@ install.packages("sjstats")
 install.packages("sjPlot")
 ```
 
-Or install packages all at once, calling `install.packages()` function just once.
+Or install packages all at once, calling `install.packages()` function just once, using the `c()` (combine/concatenate) to combine all your package names into one big vector (more on what vectors and classes are later).
 
 ``` r
 install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
@@ -66,6 +69,16 @@ Use `library()` to load packages and use semi-colon (;) to load multiple package
 ``` r
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
+
+Changing R default option settings
+----------------------------------
+
+I also strongly recommend changing a few default R options. Click on **RStudio -&gt; Preferences -&gt; General Tab** and (un)check the boxes below.
+
+-   You might want to change your default working directory at the top. This directory will be where RStudio saves all your work automatically if you don't manually specify/change your working directory later on (more on directories later on).
+-   By default, RStudio reloads your previously saved work whenever you reopen it, which can often be disastrous (just like you might not want Microsoft Word to always reopen the document you last worked on every single time you open it). So we are disabling (unchecking) relevant features.
+
+![R options](./Extra/R_preference_settings.jpg)
 
 Working/current directory: Where are you and where should you be? `getwd()`
 ---------------------------------------------------------------------------

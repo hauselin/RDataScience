@@ -16,15 +16,17 @@ After installing both R and RStudio, run RStudio. We usually never use R itself 
 
 ## Installing R packages
 
-I use a few R packages regularly. To install all of them, first make sure you have the latest version of R and RStudio. Then to install packages, run the following code in RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
+I use a few R packages regularly (especially in my [custom functions](https://github.com/hauselin/Rcode), which will also try to install a few of these packages if you don't already have them). To install all of them, first make sure you have the latest version of R and RStudio. Then to install packages, run the following code in RStudio. You only need to install any given package once (but remember to update them when newer versions are available).
 
 You can install one package at a time or multiple at once. I suggest installing one at a time because it can be can be error-prone if you try to install too many packages at once because the warning/error messages can become difficult quite abstruse (if there are any).
 
+Comments are preceded by the # symbol in R, and you can use # or #' for multi-line comments. R won't 
+
 ```
-# install packages all at once using c()
+# install packages all at once using c(), which allows you to combine/concatenate stuff
 install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
 
-# install one by one
+#' install one by one
 #' I have commented out (added a # sign in front of a line)
 #' the line of code below so I won't run it accidentally,
 #' or it's to tell myself or others who are reading my code,
@@ -43,8 +45,6 @@ install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTe
 # install.packages("sjstats")
 # install.packages("sjPlot")
 ```
-
-I use many of these packages in my [custom functions](#custom-r-functions) (although when you use these functions, they'll try to install these packages if you don't already have them).
 
 Every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once using `library()`.
 
