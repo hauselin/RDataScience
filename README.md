@@ -71,7 +71,6 @@ These R packages above are very powerful and it's worth learning them well.
     - produces beautiful and informative ggplots that show distributions of datapoints
 * [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)
     - combines multiple ggplots into one plot
-* [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)
 
 ## My custom R functions
 
