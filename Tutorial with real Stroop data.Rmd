@@ -1,0 +1,82 @@
+---
+title: "Tutorial with real Stroop data"
+author: Hause Lin
+output: 
+    github_document:
+        toc: true
+        # toc_float: false
+        # theme: lumen
+        # highlight: tango
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r set up workspace, results="hide", message=FALSE, warning=FALSE}
+rm(list = ls()) # clear workspace and environment
+library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+# load("Tutorial with real Stroop data.RData")
+# save.image("Tutorial with real Stroop data.RData")
+
+source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")
+source("https://raw.githubusercontent.com/hauselin/Rcode/master/detectOutliers.R")
+source("https://raw.githubusercontent.com/hauselin/Rcode/master/se.R")
+```
+
+```{r read data}
+subjectData <- file.path(getwd(), 'Data') # data path
+dataDir <- list.files(subjectData, full.names = T) # full path to all files/directories in raw data folder
+filesToRead <- dataDir[grep(pattern = 'StroopRawSubject', x = dataDir)] # paths to all the matching files
+dataRaw <- lapply(1:length(filesToRead), function(x) fread(filesToRead[x])) # read all matching files in and store in a list
+dataRaw <- tbl_dt(rbindlist(dataRaw)) # convert that list to a datatable
+data <- copy(dataRaw) # make a copy of the data
+```
+
+```{r check data}
+data
+glimpse(data)
+data[, n_distinct(pNo)] # number of subjects
+data[, .N, by = pNo] # trials per subject
+data[, unique(condition)]
+```
+
+```{r clean and organize data} 
+data[, rt := rt / 1000]
+```
+
+```{r remove rt outliers per person}
+data[, rtMAD := outliersMAD(rt, MADCutOff = 3), by = pNo] # convert extreme rt values to NA
+summary(data)
+data[is.na(rtMAD), acc := NA]
+summary(data)
+```
+
+```{r stroop rt by condition and congruency}
+grandAvg_conditionCongruency <- seWithin(data = data, measurevar = c("acc", "rt"), withinvars = c("condition", "congruency"), idvar = 'pNo')
+
+avg_conditionCongruency <- data[, .(acc = mean(acc, na.rm = T),
+                                    rt = mean(rt, na.rm = T)), by = .(pNo, condition, congruency)]
+
+plot_rt <- ggplot(grandAvg_conditionCongruency$rt, aes(condition, rt, col = congruency)) +
+    geom_quasirandom(data = avg_conditionCongruency, aes(condition, rt, col = congruency), alpha = 0.4) +
+    geom_point(position = position_dodge(0.5), size = 3) +
+    geom_errorbar(aes(ymin = rt - ci, ymax = rt + ci), position = position_dodge(0.5), width = 0, size = 1) +
+    labs(x = "Experimental condition", y = "Reaction time (95% CI)", col = "Stroop congruency")
+plot_rt
+
+model_rt <- lmer(rt ~ condition * congruency + (1 | pNo), data = data)
+summary(model_rt)
+summaryh(model_rt)
+```
+
+```{r stroop acc by condition and congruency}
+plot_acc <- ggplot(grandAvg_conditionCongruency$acc, aes(condition, acc, col = congruency)) +
+    geom_quasirandom(data = avg_conditionCongruency, aes(condition, acc, col = congruency), alpha = 0.4) +
+    geom_point(position = position_dodge(0.5), size = 3) +
+    geom_errorbar(aes(ymin = acc - ci, ymax = acc + ci), position = position_dodge(0.5), width = 0, size = 1) +
+    labs(x = "Experimental condition", y = "Accuracy (95% CI)", col = "Stroop congruency")
+plot_acc
+
+model_acc <- glmer(acc ~ condition * congruency + (1 | pNo), data = data, family = 'binomial')
+summary(model_acc)
+summaryh(model_acc)
+```
