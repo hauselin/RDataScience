@@ -662,13 +662,31 @@ What we fit just one model to all the data (all 40 rows), what's the relationshi
 
 And what happens when we fit the model to each class separately, what's the relationship between iq and grades? Positive or negative? We'll explore these relationships in depth in future tutorials.
 
-### Reassigning in data.tables with `:=` 
+### Creating new variables/columns and reassigning in data.tables with `:=` 
 
 ```{r}
-
+df4[, class := toupper(class)] # convert to upper case
+df4[, class := tolower(class)] # convert to lower case
+df4[, sex := gender] # make a copy of column
+# same as df4$sex <- df4$gender
+df4[, sex := substr(sex, 1, 1)] # take only first character
+# same as df4$sex <- substr(df4$sex, 1, 1)
+df4[, iqCopy := iq]
+df4[iqCopy < 100, iqCopy := NA] # convert values less than 100 to NA
+df4[is.na(iqCopy)] # filter via i (show only rows where iqCopy is NA)
 ```
 
+```{r, error=TRUE}
+df4[iqCopy == NA] # DOESN'T WORK!!! use is.na()
+```
 
+Remove columns with `NULL`
+
+```{r}
+df4[, iqCopy := NULL]
+# same as df4$iqCopy <- NULL
+df4[, sex := NULL]
+```
 
 ### Renaming with `setnames()`
 
