@@ -641,8 +641,93 @@ summary(manova_results) # manova results
 summary.aov(manova_results) # see which outcome variables differ
 ```
 
-### MANOVA resources
+#### MANOVA resources
 
 * [link 1](https://rpubs.com/aaronsc32/manova)
 * [link 2](https://www.statmethods.net/stats/anova.html)
 * [link 3](http://www.sthda.com/english/wiki/manova-test-in-r-multivariate-analysis-of-variance)
+
+### Computing between- and within-subjects error bars (also between-within designs)
+
+Error bars for between- and within-subjects designs have to be calculated differently. There's much debate on how to compute within-subjects this properly...
+
+```{r}
+cw <- tbl_dt(ChickWeight) # convert built-in ChickWeight data to data.table and tibble
+```
+
+Data information
+
+* ID variable: Chick (50 chicks)
+* outcome/dependent variable: weight (weight of Chick) (**within**-subjects variable)
+* predictor/indepedent variable: Diet (diet each Chick was assigned to) (**between**-subjects variable)
+
+```{r}
+cw # weight of 50 chicks are different times, on different diets
+cw[, unique(Time)] # time points
+cw[, n_distinct(Chick)] # no. of Chicks
+cw[, unique(Diet)] # Diets
+```
+
+#### Between-subject error bars
+
+Do different diets lead to different weights? Each chick is only assigned to one diet (rather than > 1 diet), so we can use between-subjects error bars (or confidence intervals).
+
+```{r}
+ggplot(cw, aes(Diet, weight)) +
+    geom_quasirandom(alpha = 0.3) + # this line plots raw data and can be omitted, depending on your plotting preferences
+    stat_summary(fun.y = mean, geom = 'point', size = 5) + # compute mean and plot
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # compute between-sub confidence intervals
+```
+
+#### Within-subject error bars
+
+How does weight change over time (ignoring diet)? Each chick has multiple measurements of time, so we'll use within-subjects error bars, which we have to calculate ourselves. 
+
+[Here](https://github.com/hauselin/Rcode) is a function to do it (check out the website to see how to compute both between- and within-subject error bars). To compute within-subject error bars, first run `source("https://raw.githubusercontent.com/hauselin/Rcode/master/se.R")` to load a few functions in your environment. 
+
+Use `seWithin()` to compute within-subjects error bars.
+
+```{r}
+source("https://raw.githubusercontent.com/hauselin/Rcode/master/se.R")
+cw_weight_withinEB <- seWithin(data = cw, measurevar = c("weight"), withinvars = c("Time"), idvar = "Chick")
+```
+
+The output contains the mean weight at each time, number of values (N), standard deviation, standard error, and confidence interval (default 95% unless you change via the `conf.interval` argument). The output contains information you'll use for plotting with `ggplot`.
+
+Plot with within-subjects error bars
+
+```{r}
+ggplot(cw_weight_withinEB, aes(Time, weight)) +
+    geom_quasirandom(data = cw, alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting
+    geom_point() + # add points
+    geom_errorbar(aes(ymin = weight - ci, ymax = weight + ci), width = 0) # ymin (lower bound), ymax (upper bound)
+```
+
+Note the second line `geom_quasirandom(data = cw, alpha = 0.1)` adds the raw data to the plot (hence `data = cw`). Depending your data structure and research questions, you might have to compute your "raw data" for the plot differently before specifying it in `geom_quasirandom()`.
+
+Plot with between-subjects error bars (WRONG but illustrative purposes)
+
+```{r}
+ggplot(cw, aes(Time, weight)) +
+    geom_quasirandom(alpha = 0.1) + # this line plots raw data and can be omitted, depending on your plotting preferences
+    stat_summary(fun.y = mean, geom = 'point') + # compute mean and plot
+    stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0) # compute between-sub confidence intervals
+```
+
+#### Mixed (between-within) designs
+
+Let's investigate the effects of time (within-subjects) and diet (between-subjects) together.
+
+```{r}
+cw_weight_mixed <- seWithin(data = cw, measurevar = c("weight"), betweenvars = c("Diet"), withinvars = c("Time"), idvar = "Chick")
+```
+
+Now your summary output has an extra Diet column.
+
+```{r}
+ggplot(cw_weight_mixed, aes(Time, weight, col = as.factor(Diet))) + # Diet is numeric but we want it to be a factor/categorical variable
+    geom_quasirandom(data = cw, alpha = 0.3, dodge = 0.7) + # this line plots raw data and can be omitted, depending on your plotting
+    geom_point(position = position_dodge(0.7), size = 2.5) + # add points
+    geom_errorbar(aes(ymin = weight - ci, ymax = weight + ci), width = 0, position = position_dodge(0.7), size = 1) + # ymin (lower bound), ymax (upper bound)
+    labs(col = "Diet")
+```
