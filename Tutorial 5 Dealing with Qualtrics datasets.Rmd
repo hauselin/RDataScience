@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 2: tidyverse and datatable"
+title: "Tutorial 5: Cleaning and analyzing questionnaires/surveys (reliability)"
 author: Hause Lin
 output: 
     github_document:
@@ -8,146 +8,241 @@ output:
         # theme: lumen
         # highlight: tango
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
+
+## Loading frequently-used packages with `library()`
+
+I always load my frequently-used packages at the top of each script.
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
 
-## Reading data into R
+## Read data (Qualtrics survey data) 
 
-Read file in a directory and save the data as an object in the environment by using the assignment `<-` operator. 
-
-```{r read data, results="hide", message=FALSE, warning=FALSE}
-df1 <- read.csv("./Data/sleep.csv") # base R read.csv() function
-# same as df1 <- read.csv("Data/sleep.csv")
-# READ: assign the output read.csv("Data/sleep.csv") into df1
-
-df2 <- fread("./Data/sleep.csv") # fread() from library(data.table)
-# same as df2 <- fread("Data/sleep.csv")
-
-# my favorite way of reading data: combining tbl_dt() and fread()
-df3 <- tbl_dt(fread("./Data/sleep.csv")) # tbl_dt() from library(dtplyr)
-# same as df3 <- tbl_dt(fread("Data/sleep.csv"))
-```
-
-The `.` in the file path simply refers to the current working directory, so it can be dropped. And `..` can be used to refer to the parent directory.
-
-## Comparing the outputs of read.csv(x), fread(x), and tbl_dt(fread(x))
+Here's a raw dataset collected using Qualtrics
 
 ```{r}
-df1 # read.csv("./Data/sleep.csv")
-class(df1) # read.csv("./Data/sleep.csv")
-```
-
-```{r}
-df2 # fread("./Data/sleep.csv") # fread() from library(data.table)
-class(df2) # fread("./Data/sleep.csv") # fread() from library(data.table)
-```
-
-How's the output different from the one above?
-
-```{r}
-df3 # tbl_dt(fread("./Data/sleep.csv")) # tbl_dt() from library(dtplyr)
-class(df3) # tbl_dt(fread("./Data/sleep.csv")) # tbl_dt() from library(dtplyr)
-```
-
-How's the output different from the two outputs above?
-
-### Reading URLs and other formats
-
-Check out the csv (comma separated values) data [here](https://raw.githubusercontent.com/hauselin/RDataScience/master/Data/sleep.csv). You can read data directly off a website.
-
-Most of these read functions can import/read different types of files (e.g., csv, txt, URLs) as long as the raw data are formatted properly (e.g., separated by commas, tabs). But if you're trying to read proprietary data formats (e.g., SPSS datasets, Excel sheets), you'll need to use other libraries (e.g., `readxl`, `foreign`) to read those data into R.
-
-```{r}
-df_url <- tbl_dt(fread("https://raw.githubusercontent.com/hauselin/RDataScience/master/Data/sleep.csv"))
-df_url # print data to console; same dataset as tbl_dt(fread("./Data/sleep.csv"))
-```
-
-## Summarizing objects
-
-You can summarize objects quickly by using `summary()`, `str()`, `glimpse()`, or `print(x, n)`.
-
-To view the first/last few items of an object, use `head()` or `tail()`.
-
-```{r}
-summary(df1) # we use summary() for many many other purposes
-str(df1) 
+df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))
+df1
 glimpse(df1)
-head(df1)
-head(df3, n = 3) # what does this do?
-tail(df3, n = 2)
-print(df3, n = Inf) # Inf is infinte (so print all rows)
 ```
 
-Use pipes `%>%` to summarize objects
+With Qualtrics datasets, the first row (or even first few rows) of the dataset might contain irrelevant variables and information. If they contain extra rows, do the following to get rid of rows (commented out for now). But play with your dataset to see which rows you should remove.
+
+In this example, row 1 contains extra data (the actual questions themselves), so we're removing it. 
 
 ```{r}
-df3 %>% head(n = 2)
-df3 %>% head(2) # why does this work?
-df3 %>% print(Inf)
-df3 %>% summary() # does this work? why?
+df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))[-1] # delete row 1
+# df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))[-c(1:5)] # delete rows 1:5 (example)
+df1
+glimpse(df1)
+names(df1)
 ```
 
-Datatables and `dplyr`'s data_frame are much better because they tell us the class of each variable at the top when you print the object in the console. They also tell you the dimensions of your data.
+Cleaning data. If my id variable is all in numbers, I often make sure they are numerics!
 
 ```{r}
-df3 # data_frame (dplyr) + data.table + tibble
+df1$id # not numeric
 ```
 
-## Using `$` and `[]` to extract elements using their names
+Convert to numerics by applying the `as.numeric()` function
 
-```{r} 
-names(df3)
-df3$extra # extracts column/variable as a vector
-df3$group
-df3$ID
+```{r}
+df1[, id := as.numeric(id)] 
+```
+
+## Select questionnaire items for relability analysis
+
+* use `select()` and `starts_with`, `matches()`, `contains()`, and `ends_with()` to select questionanire items for a scale
+
+```{r}
+scale_implicitBeliefs <- select(df1, starts_with("ImplicitB"))
+scale_implicitBeliefs
+```
+
+Note that the variable types are all characters. Use `sapply()` (a loop) to loop through each column/variable, and convert them to `numeric` class. 
+
+```{r}
+scale_implicitBeliefs$ImplicitB_1 # all those quotation marks tell you it's a character
 ```
 
 ```{r}
-myList <- list(a = -999, b = c(TRUE, FALSE, T, T), c = c('myAmazingList')) # create a list with named items a, b, c
-class(myList)
-names(myList) 
-myList # note the formatting/structure of a list ($ signs tell you how to extract items)
-myList$a
-myList$b # lists can store objects of different classes (unlike most other objects, which expect all items to be of same class)
-myList$c
+scale_implicitBeliefsNumeric <- sapply(scale_implicitBeliefs, as.numeric) # convert to numeric (also a matrix)
+scale_implicitBeliefsNumeric
+```
+
+I usually prefer to convert column classes using `data.table` syntax using `.SD` (*S*ubset of *D*atatable). Below, it's just saying, for every column in the `data.table`, convert it to numeric by applying the `as.numeric()` function to every column.
+
+```{r}
+scale_implicitBeliefsNumeric <- scale_implicitBeliefs[, lapply(.SD, as.numeric)]
+scale_implicitBeliefsNumeric
+```
+
+Run reliability analysis
+
+```{r}
+library(psych) # psych package has the alpha() function to compute reliability
 ```
 
 ```{r}
-df1['extra'] # same as df$extra, but uses characters (in '') to extract elements
+scale_implicitBeliefsReliability <- alpha(scale_implicitBeliefsNumeric)
+scale_implicitBeliefsReliability
 ```
 
-** BUT the syntax above only works for the `data.frame` class!**
+Very low reliabilty! The function warns you if it thinks certain items should be reverse-scored!
 
-```{r, error=TRUE}
-df3['extra'] # fails!!!
-```
-
-If it's a `data.table` class, you do it differently (so know the classes of your objects)! More on `data.table` later on.
+You can set `check.keys = T` to automatically reverse-score items!
 
 ```{r}
-df3[, extra] # df3[i, j] (i is row, and j is column)
+scale_implicitBeliefsReliability <- alpha(scale_implicitBeliefsNumeric, check.keys = T) # automatically reverse-scores items if necessary
+scale_implicitBeliefsReliability
 ```
 
-## tidyverse: a collection of R packages
+Now reliability is much higher!
 
-[tidyverse:](https://www.tidyverse.org/packages/)
+## Use `cleanQuestionnaire()` function instead
 
->  The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. 
-
-Included packages: `ggplot2`, `dplyr`, `tidyr`, `stringr` etc. [see official website for documentation](https://www.tidyverse.org/packages/)
+What if you want to compute each subject's scale mean? You can use `data.table` and `tidyverse` to do it. But with many scales, it can get tedious. Hence, I've written the `cleanQuestionnaire()` to automate certain steps. To use the function, first run `source('https://raw.githubusercontent.com/hauselin/Rcode/master/cleanQuestionnaire.R')` to get the function. Check out the actual [website itself](https://raw.githubusercontent.com/hauselin/Rcode/master/cleanQuestionnaire.R) if you wanto read the documentation of the function.
 
 ```{r}
-library(tidyverse)
+source("https://raw.githubusercontent.com/hauselin/Rcode/master/cleanQuestionnaire.R")
 ```
 
-## Supercharging your workflow with data.table()
+Select data. Make sure the first column is subject id, and subsequent columns are items for a specific scale
+
+* select id column (required)
+* select items of a particular scale
 
 ```{r}
-df3[, extra]
-df3[, .(extra)] # what's the difference? compare the classes of df3[, extra] and df3[, .(extra)]
+scale_implicitBeliefs <- select(df1, id, starts_with("ImplicitB"))
+scale_implicitBeliefs
+```
+
+Convert all columns to numeric
+
+```{r}
+scale_implicitBeliefs <- scale_implicitBeliefs[, lapply(.SD, as.numeric)]
+scale_implicitBeliefs
+```
+
+
+Run `cleanQuestionnaire()` function
+
+The function will double-check with you regarding which items to reverse-code, and which subscale an item belongs to. If everything looks correct, press 1 and hit enter to continue. 
+
+The function accepts characters AND numerics scale items!
+
+More documentation to follow [here](https://github.com/hauselin/Rcode) in the near future...
+
+Function arguments
+
+* data: data containing subject id and scale items (wide form)
+* subjectCol: indicate which column contains subject id (default = 1)
+* scaleName: give your scale a good name
+* scaleMin: what's the scale mininum
+* scaleMax: what's the scale maximum
+* subscales: use a list() to specify item numbers for each subscale (if no subscale, just don't specify this subscales argument)
+* itemsToReverse: item numbers to reverse-code
+* checkReliability: T or F (whether to do reliability analysis) (does it separately for each subscale)
+
+```{r, eval=F}
+scale_implicitBeliefs_clean <- cleanQuestionnaire(data = scale_implicitBeliefs, subjectCol = 1, scaleName = "implicitBeliefs", scaleMin = 1, scaleMax = 6, subscales = list(implicitBeliefsA = c(1, 3, 5), implicitBeliefsB = c(2, 4, 6)), itemsToReverse = c(1, 2, 5), checkReliability = T)
+```
+
+```{r, echo=F}
+scale_implicitBeliefs_clean <- read_rds("./Extra/scaleInfo.rds")
+```
+
+The output is a `list` class.
+
+```{r}
+class(scale_implicitBeliefs_clean)
+```
+
+```{r}
+names(scale_implicitBeliefs_clean)
+```
+
+It contains the wide data, long data, and reliability results. To subset lists, use `$` to extract by name.
+
+Get wide data: id variable, scale overall mean, and all subscale means
+
+```{r}
+scale_implicitBeliefs_clean$wide
+```
+
+Get long data: id variable, scale/subscale means (_m), standard deviations (_stdev), and range (_rge)
+
+```{r}
+scale_implicitBeliefs_clean$long
+```
+
+Get reliablity results (one set of results for each subscale)
+
+```{r}
+scale_implicitBeliefs_clean$reliability
+```
+
+## Another `cleanQuestionnaire()` example
+
+Select data. Make sure the first column is subject id, and subsequent columns are items for a specific scale
+
+* select id column (required)
+* select items of a particular scale
+
+```{r}
+scale_workload <- select(df1, id, starts_with("Workload"))
+scale_workload
+```
+
+Run function
+
+* no subscales, 1 item to reverse
+
+```{r, eval=F}
+scale_workload_clean <- cleanQuestionnaire(data = scale_workload, subjectCol = 1, scaleName = "workload", scaleMin = 1, scaleMax = 21, itemsToReverse = c(4), checkReliability = T)
+```
+
+```{r, echo=F}
+scale_workload_clean <- read_rds("./Extra/scaleInfo2.rds")
+```
+
+Check results
+
+```{r}
+scale_workload_clean$wide
+```
+
+```{r}
+scale_workload_clean$long
+```
+
+```{r}
+scale_workload_clean$reliability
+```
+
+## Joining and saving wide data from multiple scales
+
+Use `left_join()` to join two scales (both are wide form)
+
+```{r}
+joined <- left_join(scale_implicitBeliefs_clean$wide, scale_workload_clean$wide, by = 'id')
+joined
+```
+
+## Save joined data as .rds object
+
+You can run the line below (without the # sign) to save any object as a .rds file. 
+
+```{r, eval=F}
+write_rds(joined, "scale_subject_means.rds") # save to your current directory
+```
+
+To read that back into R later on, use `read_rds()`
+
+```{r, eval=F}
+joined <- read_rds("scale_subject_means.rds") # read .rds file in your current directory into R
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 3 ggplot2 and model fitting"
+title: "Tutorial 3: ggplot2 and model fitting"
 author: Hause Lin
 output: 
     github_document:

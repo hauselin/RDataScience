@@ -1,6 +1,6 @@
 # Data Science with R for Psychologists
 
-If you're new to R, follow the instructions below to install R and RStudio. Otherwise, if you want to check out my tutorials, follow these instructions: I've created a few tutorials (see links that end with **.md** extension) and it's highly recommended that you go through them sequentially. The corresponding **.rmd**  files are the RMarkdown files I've used to create these tutorials. The data used in the tutorials are in the **Data** directory. To everything from my github repository, click the green **Clone or download** button at the top right. 
+If you're new to R, follow the instructions below to install R and RStudio. Otherwise, if you want to check out my tutorials, follow these instructions: I've created a few tutorials (see links that end with **.md** extension) and it's highly recommended that you go through them sequentially. The corresponding **.rmd**  files are the RMarkdown files I've used to create these tutorials (check them out to see how I've created these tutorials: click on one of them and click on **Raw** to see the script). The data used in the tutorials are in the **Data** directory. To everything from my github repository, click the green **Clone or download** button at the top right. 
 
 ## Installing (or updating) R and RStudio
 
@@ -26,7 +26,7 @@ Comments are preceded by the # symbol in R, and you can use # or #' for multi-li
 
 ```
 # install packages all at once using c(), which allows you to combine/concatenate stuff
-install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot"))
+install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTest", "ggbeeswarm", "cowplot", "piecewiseSEM", "compute.es", "sjstats", "sjPlot", "Hmisc"))
 
 #' install one by one
 #' I have commented out (added a # sign in front of a line)
@@ -46,6 +46,7 @@ install.packages(c("tidyverse", "data.table", "broom", "dtplyr", "lme4", "lmerTe
 # install.packages("compute.es")
 # install.packages("sjstats")
 # install.packages("sjPlot")
+# install.packages("Hmisc")
 ```
 
 Every time I start a new R session in RStudio, I usually run this line of code somewhere at the top of my R script to load all these libraries all at once using `library()`.
