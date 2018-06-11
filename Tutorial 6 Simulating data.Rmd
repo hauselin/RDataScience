@@ -8,7 +8,7 @@ output:
         # theme: lumen
         # highlight: tango
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ## Loading frequently-used packages with `library()`
@@ -18,3 +18,73 @@ I always load my frequently-used packages at the top of each script.
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
+
+## Generate random values from a normal distribution
+
+```{r}
+rnorm(n = 10) # 10 values (values from standard normal distribution: mean 0, sd 1)
+```
+
+```{r}
+rnorm(n = 100, mean = 100, sd = 15) # 100 values from a normal distribution (mean 100, sd = 15)
+```
+
+```{r}
+x <- rnorm(n = 1000, mean = 100, sd = 15) # 1000 values from a normal distribution (mean 100, sd = 15)
+hist(x) # base R plot histogram
+```
+
+## Generate random values from a uniform distribution
+
+```{r}
+x <- runif(n = 1000, min = 10, max = 20)
+hist(x)
+```
+
+## Simulate a t-test with `rnorm()`
+
+Group a (n = 20): mean 100, sd 15
+Group b (n = 20): mean 115, sd 20
+
+```{r}
+fakeData <- data_frame(group = rep(c("a", "b"), each = 20), 
+                       value = c(rnorm(20, 100, 15), rnorm(20, 115, 20))) 
+print(fakeData, n = Inf)
+```
+
+Will group differences be significant?
+
+```{r}
+simulateResults <- t.test(value ~ group, data = fakeData)
+simulateResults
+source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")
+summaryh(simulateResults) # my custom function
+```
+
+## Manipulating strings
+
+Substitute patterns
+
+```{r}
+gsub(pattern = "a", replacement = "_HEY_", x = c("aba", "cae", "xxx"))
+gsub(pattern = "a", replacement = " ", x = c("aba", "cae", "xxx"))
+gsub(pattern = "a", replacement = "", x = c("aba", "cae", "xxx"))
+```
+
+Find matching patterns
+
+```{r}
+text <- c("foot","lefroo", "bafOobar", "zeb")
+grep(pattern = "oo", x = text, ignore.case = T)
+grep(pattern = "oo", x = text, ignore.case = F)
+grepl(pattern = "oo", x = text, ignore.case = T)
+grepl(pattern = "oo", x = text, ignore.case = F)
+```
+
+### Manipulating string resources
+
+* (stringr tutorial/vignette)[https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html]
+
+## the apply family in R (looping without for loops)
+
+* `lapply`, `apply`, `sapply`, `vapply`, `tapply`
