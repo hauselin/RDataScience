@@ -83,7 +83,7 @@ grepl(pattern = "oo", x = text, ignore.case = F)
 
 ### Manipulating string resources
 
-* (stringr tutorial/vignette)[https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html]
+* [stringr tutorial/vignette](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html)
 
 ## the apply family in R (looping without for loops)
 
