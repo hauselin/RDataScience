@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 6: Simulating data"
+title: "Tutorial 6: Simulating data and manipulating strings/characters"
 author: Hause Lin
 output: 
     github_document:
