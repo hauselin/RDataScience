@@ -77,8 +77,16 @@ plot1 <- ggplot(df1, aes(iq, grades)) +
     scale_y_continuous(limits = c(0, 100), breaks = c(0, 20, 40, 60, 80, 100)) + # y axis limits/range (0, 100), break points
     scale_x_continuous(limits = c(90, 130)) # x axis limits/range
 plot1 # print plot
-
 ```
+
+## Save a plot to your directory
+
+Save to Figures directory, assuming this directory/folder already exists. You can also change the width/height of your figure and dpi (resolution/quality) of your figure (journals usually expect around 300 dpi).
+
+```{r, eval=F}
+ggsave(plot1, './Figures/iq_grades.png', width = 10, heigth = 10, dpi = 100)
+```
+
 
 ## Add line of best fit
 
@@ -513,6 +521,11 @@ summaryh(anova_classGender)
 ### Post-hoc tests resources
 
 * [UCLA site](https://stats.idre.ucla.edu/r/faq/how-can-i-do-post-hoc-pairwise-comparisons-in-r/)
+
+### Plotting and testing simple effects when you have interactions
+
+* `sjPlot` package: see [here](http://www.strengejacke.de/sjPlot/)
+* [more tutorial and packages](https://cran.r-project.org/web/packages/jtools/vignettes/interactions.html)
 
 ### Fit t-test with `t.test()`
 

@@ -1,4 +1,4 @@
-Tutorial 3 ggplot2 and model fitting
+Tutorial 3: ggplot2 and model fitting
 ================
 Hause Lin
 
@@ -8,6 +8,7 @@ Hause Lin
     -   [Layer 1: specify data object, axes, and grouping variables](#layer-1-specify-data-object-axes-and-grouping-variables)
     -   [Subsequent layers: add data points and everything else](#subsequent-layers-add-data-points-and-everything-else)
 -   [Save the plot as an object](#save-the-plot-as-an-object)
+-   [Save a plot to your directory](#save-a-plot-to-your-directory)
 -   [Add line of best fit](#add-line-of-best-fit)
 -   [Grouping](#grouping)
     -   [Use `col` to specify grouping variable](#use-col-to-specify-grouping-variable)
@@ -25,6 +26,7 @@ Hause Lin
     -   [Fitting ANOVA with `anova` and `aov`](#fitting-anova-with-anova-and-aov)
     -   [Specify contrasts resources](#specify-contrasts-resources)
     -   [Post-hoc tests resources](#post-hoc-tests-resources)
+    -   [Plotting and testing simple effects when you have interactions](#plotting-and-testing-simple-effects-when-you-have-interactions)
     -   [Fit t-test with `t.test()`](#fit-t-test-with-t.test)
     -   [Multi-level (hierarchical) model with `lmer()` from the `lme4` package](#multi-level-hierarchical-model-with-lmer-from-the-lme4-package)
     -   [More multi-level model resources](#more-multi-level-model-resources)
@@ -168,6 +170,15 @@ plot1 # print plot
 
 ![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
+Save a plot to your directory
+-----------------------------
+
+Save to Figures directory, assuming this directory/folder already exists. You can also change the width/height of your figure and dpi (resolution/quality) of your figure (journals usually expect around 300 dpi).
+
+``` r
+ggsave(plot1, './Figures/iq_grades.png', width = 10, heigth = 10, dpi = 100)
+```
+
 Add line of best fit
 --------------------
 
@@ -178,7 +189,7 @@ plot1 +
 
     ## `geom_smooth()` using method = 'loess'
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
 Same as above
 
@@ -193,7 +204,7 @@ ggplot(df1, aes(iq, grades)) +
 
     ## `geom_smooth()` using method = 'loess'
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 Note that the smooth (i.e., the line of best fit) is on top of the dots, because of layering. Let's add the line first, then use `geom_point()`. What do you think will happen?
 
@@ -208,7 +219,7 @@ ggplot(df1, aes(iq, grades)) +
 
     ## `geom_smooth()` using method = 'loess'
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 Note that now the points are above the line. Also, I've added a title via the `labs()` line.
 
@@ -221,7 +232,7 @@ ggplot(df1, aes(iq, grades)) +
     geom_smooth(method = 'lm', se = F, col = 'black') # fit linear regression line, remove standard error, black line
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
 Why is IQ negatively correlated with grades?
 
@@ -241,7 +252,7 @@ ggplot(df1, aes(iq, grades, col = class)) +
     geom_smooth(method = 'lm', se = F) # fit linear regression line 
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-11-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
 `ggplot(df1, aes(iq, grades, col = class))` specifies the data to plot `df1`, x-axis `iq`, y-axis `grades`, and to give different colours to different groups `col = class`, where `class` refers to the grouping variable in the dataset.
 
@@ -258,7 +269,7 @@ ggplot(df1, aes(iq, grades, shape = class)) +
     geom_smooth(method = 'lm', se = F) # fit linear regression line 
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-12-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 ### Adding an overall line of best fit while ignoring class
 
@@ -271,7 +282,7 @@ ggplot(df1, aes(iq, grades, col = class)) +
     geom_smooth(method = 'lm', se = F, aes(group = 1)) # fit linear regression line 
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-14-1.png)
 
 ### Adding an overall line of best fit AND separate lines for each group
 
@@ -286,7 +297,7 @@ plot2 <- ggplot(df1, aes(iq, grades, col = class)) +
 plot2
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-14-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
 [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox): Negative overall relationship, but positive relationship within each class.
 
@@ -302,7 +313,7 @@ ggplot(df1, aes(iq)) +
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-15-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-16-1.png)
 
 Specifying binwidth
 
@@ -311,7 +322,7 @@ ggplot(df1, aes(iq)) +
     geom_histogram(binwidth = 5)
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-16-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-17-1.png)
 
 Density plot
 
@@ -320,7 +331,7 @@ ggplot(df1, aes(iq)) +
     geom_density()
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-17-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-18-1.png)
 
 Boxplot for each class
 
@@ -329,7 +340,7 @@ ggplot(df1, aes(class, grades)) +
     geom_boxplot()
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-18-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-19-1.png)
 
 Violinplot for each class
 
@@ -338,7 +349,7 @@ ggplot(df1, aes(class, grades)) +
     geom_violin()
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-19-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-20-1.png)
 
 Layering and colouring plots
 
@@ -349,7 +360,7 @@ ggplot(df1, aes(class, grades, col = class)) +
     geom_point()
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-20-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-21-1.png)
 
 Distribution of points with `geom_quasirandom()`
 ------------------------------------------------
@@ -363,7 +374,7 @@ ggplot(df1, aes(class, grades, col = class)) +
     geom_quasirandom()
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-21-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-22-1.png)
 
 ``` r
 df1$overallClass <- "one_class" # create variable that assigns everyone to one class
@@ -377,7 +388,7 @@ ggplot(df1, aes(overallClass, grades)) + # y: grades
     geom_quasirandom()
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-23-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-24-1.png)
 
 ``` r
 ggplot(df1, aes(overallClass, iq)) + # y: iq
@@ -385,7 +396,7 @@ ggplot(df1, aes(overallClass, iq)) + # y: iq
     labs(x = "") # remove x-axis label (compare with above)
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-24-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-25-1.png)
 
 Summary statistics with ggplot2
 -------------------------------
@@ -399,7 +410,7 @@ ggplot(df1, aes(class, iq)) + # y: iq
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # apply mean_cl_normal function to data
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-25-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-26-1.png)
 
 Facets for grouping: `facet_wrap()` and `facet_grid()`
 ------------------------------------------------------
@@ -421,7 +432,7 @@ ggplot(df1, aes(iq, grades)) +
     geom_smooth(method = 'lm', se = F)
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-27-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-28-1.png)
 
 Using facets instead of `col = class`. See the last line of code `facet_wrap()`.
 
@@ -437,7 +448,7 @@ ggplot(df1, aes(iq, grades)) +
     facet_wrap(~class) # one facet per class
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-28-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-29-1.png)
 
 `facet_wrap()`: one facet per class and gender
 
@@ -451,7 +462,7 @@ ggplot(df1, aes(iq, grades)) +
     facet_wrap(class~gender) # one facet per class and gender
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-29-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-30-1.png)
 
 `facet_grid()`: one facet per gender
 
@@ -465,7 +476,7 @@ ggplot(df1, aes(iq, grades)) +
     facet_grid(.~gender) # one facet per gender
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-30-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-31-1.png)
 
 `facet_grid()`: one facet per gender
 
@@ -479,7 +490,7 @@ ggplot(df1, aes(iq, grades)) +
     facet_grid(gender~.) # one facet per gender
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-31-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-32-1.png)
 
 `facet_grid()`: one facet per class and gender
 
@@ -493,7 +504,7 @@ ggplot(df1, aes(iq, grades)) +
     facet_grid(gender~class) # one facet per gender
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-32-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-33-1.png)
 
 `facet_grid()`: one facet per class and gender
 
@@ -509,7 +520,7 @@ ggplot(df1, aes(iq, grades)) +
     facet_grid(gender~class, labeller = label_both) # one facet per gender
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-33-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-34-1.png)
 
 Fitting linear models (general linear model framework)
 ------------------------------------------------------
@@ -525,7 +536,7 @@ ggplot(df1, aes(iq, grades)) +
     geom_smooth(method = 'lm', se = F, col = 'black') # fit linear regression line, remove standard error, black line
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-34-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-35-1.png)
 
 ### Model specification in R
 
@@ -600,7 +611,7 @@ ggplot(df1, aes(iq, grades, col = class)) +
     geom_smooth(method = 'lm', se = F, aes(group = 1))
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-38-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-39-1.png)
 
 Test the relationship above by "controlling" for class
 
@@ -790,7 +801,7 @@ ggplot(df1, aes(class, iq)) + # y: iq
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # apply mean_cl_normal function to data
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-44-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-45-1.png)
 
 Note that class d comes first because we releveled it earlier on (we changed the reference group to d).
 
@@ -823,7 +834,7 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1, position = position_dodge(0.5))
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-46-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-47-1.png)
 
 ``` r
 anova_classGender <- aov(grades ~ class * gender, data = df1)
@@ -831,10 +842,10 @@ summary(anova_classGender)
 ```
 
     ##              Df Sum Sq Mean Sq F value   Pr(>F)    
-    ## class         3   5821  1940.4   9.405 0.000132 ***
-    ## gender        1     59    59.0   0.286 0.596440    
-    ## class:gender  3    739   246.4   1.194 0.327544    
-    ## Residuals    32   6602   206.3                     
+    ## class         3   5821  1940.4   9.115 0.000166 ***
+    ## gender        1    209   208.8   0.981 0.329447    
+    ## class:gender  3    379   126.3   0.593 0.623980    
+    ## Residuals    32   6812   212.9                     
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -843,9 +854,9 @@ summaryh(anova_classGender)
 ```
 
     ##            term                             results
-    ## 1:        class F(3, 32) = 9.41, p < .001, r = 0.68
-    ## 2:       gender F(1, 32) = 0.29, p = .596, r = 0.09
-    ## 3: class:gender F(3, 32) = 1.19, p = .328, r = 0.32
+    ## 1:        class F(3, 32) = 9.11, p < .001, r = 0.68
+    ## 2:       gender F(1, 32) = 0.98, p = .329, r = 0.17
+    ## 3: class:gender F(3, 32) = 0.59, p = .624, r = 0.23
 
 ### Specify contrasts resources
 
@@ -855,6 +866,11 @@ summaryh(anova_classGender)
 ### Post-hoc tests resources
 
 -   [UCLA site](https://stats.idre.ucla.edu/r/faq/how-can-i-do-post-hoc-pairwise-comparisons-in-r/)
+
+### Plotting and testing simple effects when you have interactions
+
+-   `sjPlot` package: see [here](http://www.strengejacke.de/sjPlot/)
+-   [more tutorial and packages](https://cran.r-project.org/web/packages/jtools/vignettes/interactions.html)
 
 ### Fit t-test with `t.test()`
 
@@ -867,7 +883,7 @@ ggplot(df1, aes(class, iq, col = gender)) + # y: iq
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1, position = position_dodge(0.5))
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-48-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-49-1.png)
 
 Gender effect
 
@@ -880,20 +896,20 @@ ttest_gender
     ##  Welch Two Sample t-test
     ## 
     ## data:  iq by gender
-    ## t = 1.6582, df = 37.506, p-value = 0.1056
+    ## t = 1.0404, df = 37.867, p-value = 0.3048
     ## alternative hypothesis: true difference in means is not equal to 0
     ## 95 percent confidence interval:
-    ##  -1.144207 11.482371
+    ##  -3.097509  9.646038
     ## sample estimates:
     ## mean in group female   mean in group male 
-    ##             112.1215             106.9524
+    ##             110.8811             107.6068
 
 ``` r
 summaryh(ttest_gender)
 ```
 
     ##                             results
-    ## 1: t(38) = 1.66, p = .106, r = 0.26
+    ## 1: t(38) = 1.04, p = .305, r = 0.17
 
 class a vs. class d
 
@@ -942,7 +958,7 @@ ggplot(df1, aes(iq, grades, col = class)) +
     geom_smooth(method = 'lm', se = F, aes(group = 1))
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-51-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-52-1.png)
 
 Model specification with `lmer()`
 
@@ -1166,7 +1182,7 @@ gather(irisDT, meaureLength, length, -Species) %>% # convert from wide to long f
     geom_quasirandom(alpha = 0.3, dodge = 0.5) 
 ```
 
-![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-56-1.png)
+![](Tutorial_3_ggplot2_and_model_fitting_files/figure-markdown_github/unnamed-chunk-57-1.png)
 
 MANOVA to test if species predicts length of sepal length and petal length?
 

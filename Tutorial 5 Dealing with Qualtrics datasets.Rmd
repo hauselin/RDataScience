@@ -232,7 +232,7 @@ joined <- left_join(scale_implicitBeliefs_clean$wide, scale_workload_clean$wide,
 joined
 ```
 
-## Save joined data as .rds object
+## Save joined data as .rds object (one object at a time)
 
 You can run the line below (without the # sign) to save any object as a .rds file. 
 
@@ -245,4 +245,20 @@ To read that back into R later on, use `read_rds()`
 ```{r, eval=F}
 joined <- read_rds("scale_subject_means.rds") # read .rds file in your current directory into R
 ```
+
+## Save your entire workspace and all objects in environment as .RData (all objects)
+
+You can run the line below (without the # sign) to save any object as a .RData file. 
+
+```{r, eval=F}
+save.image("analysis_scales.RData") # save to your current directory
+```
+
+To read that back into R later on, use `load()`
+
+```{r, eval=F}
+load("analysis_scales.Rdata") # read .rds file in your current directory into R
+```
+
+
 

@@ -8,7 +8,8 @@ Hause Lin
 -   [Use `cleanQuestionnaire()` function instead](#use-cleanquestionnaire-function-instead)
 -   [Another `cleanQuestionnaire()` example](#another-cleanquestionnaire-example)
 -   [Joining and saving wide data from multiple scales](#joining-and-saving-wide-data-from-multiple-scales)
--   [Save joined data as .rds object](#save-joined-data-as-.rds-object)
+-   [Save joined data as .rds object (one object at a time)](#save-joined-data-as-.rds-object-one-object-at-a-time)
+-   [Save your entire workspace and all objects in environment as .RData (all objects)](#save-your-entire-workspace-and-all-objects-in-environment-as-.rdata-all-objects)
 
 Loading frequently-used packages with `library()`
 -------------------------------------------------
@@ -1366,8 +1367,8 @@ joined
     ## 10    10                3.17                   3                      3.33
     ## # ... with 266 more rows, and 1 more variable: workload_m_overall <dbl>
 
-Save joined data as .rds object
--------------------------------
+Save joined data as .rds object (one object at a time)
+------------------------------------------------------
 
 You can run the line below (without the \# sign) to save any object as a .rds file.
 
@@ -1379,4 +1380,19 @@ To read that back into R later on, use `read_rds()`
 
 ``` r
 joined <- read_rds("scale_subject_means.rds") # read .rds file in your current directory into R
+```
+
+Save your entire workspace and all objects in environment as .RData (all objects)
+---------------------------------------------------------------------------------
+
+You can run the line below (without the \# sign) to save any object as a .RData file.
+
+``` r
+save.image("analysis_scales.RData") # save to your current directory
+```
+
+To read that back into R later on, use `load()`
+
+``` r
+load("analysis_scales.Rdata") # read .rds file in your current directory into R
 ```
