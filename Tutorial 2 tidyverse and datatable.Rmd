@@ -121,7 +121,7 @@ myList$c
 ```
 
 ```{r}
-df1['extra'] # same as df$extra, but uses characters (in '') to extract elements
+df1['extra'] # same as df1$extra, but uses characters (in '') to extract elements
 ```
 
 ** BUT the syntax above only works for the `data.frame` class!**
@@ -569,6 +569,13 @@ df4[, -c(2, 3, 4)] # via column index/number (minus/not columns 1, 3, 4)
 df4[, 1:3] # via column index/number (1 to 3)
 ```
 
+### Chaining with `data.table` ("piping")
+
+```{r}
+df4[1:5, 1:3][grades < 80, ][iq > 95, ] # data.table chaining (or piping)
+df4[1:5, 1:3] %>% filter(grades < 80) %>% filter(iq > 95) # same result as above
+```
+
 ### Summarize data via j
 
 ```{r}
@@ -638,8 +645,8 @@ df4 %>%
 Summarize by class and gender
 
 ```{r}
-df4[, .(iqMean = mean(iq, na.rm = T)), .(class, gender)]
-df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(class, gender)] # summarize and sort/arrange by class then gender
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(class, gender)]
+df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and sort/arrange by class then gender
 ```
 
 Combining pipes with `data.table` and `ggplot`
@@ -654,8 +661,8 @@ Extra cool stuff again...
 
 ```{r}
 df4[, summaryh(lm(grades ~ iq))] # reminder: fit model to entire dataset (grades ~ iq) and use summaryh to summarize model results
-df4[, summaryh(lm(grades ~ iq)), class] # fit model to each class separately
-df4[, tidy(lm(grades ~ iq)), class] # another way to summarize model output
+df4[, summaryh(lm(grades ~ iq)), by = class] # fit model to each class separately
+df4[, tidy(lm(grades ~ iq)), by = class] # another way to summarize model output
 ```
 
 What we fit just one model to all the data (all 40 rows), what's the relationship between iq and grades? Positive or negative? 

@@ -36,7 +36,7 @@ Create equivalent long data
 ```{r}
 long <- data_frame(student = rep(c("Andy", "Mary"), each = 3),
                    class = rep(c("englishGrades", "mathGrades", "physicsGrades"), times = 2),
-                   grades = c(1, 10, 100, -2, -20, -200))
+                   grades = c(1, 10, 1000, -2, -20, -2000))
 long
 ```
 
@@ -67,7 +67,8 @@ melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS
 Compare with the long form we created
 
 ```{r}
-melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS") %>% arrange(student, cLaSs)
+melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS") %>% 
+    arrange(student, cLaSs)
 ```
 
 ```{r}
@@ -138,7 +139,7 @@ rbind(wide, moreRows)
 ```
 
 ```{r}
-bind_rows(wide, moreRows) 
+bind_rows(wide, moreRows)
 ```
 
 `bind_rows` has same effect as rbind() above, but much more efficient/flexible and binds even if column numbers don't match (see below).

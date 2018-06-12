@@ -12,6 +12,7 @@ editor_options:
 ---
 
 ```{r set up workspace, results="hide", message=FALSE, warning=FALSE}
+setwd("/Users/Hause/Dropbox/Working Projects/RDataScience")
 rm(list = ls()) # clear workspace and environment
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 # load("Tutorial with real Stroop data.RData")

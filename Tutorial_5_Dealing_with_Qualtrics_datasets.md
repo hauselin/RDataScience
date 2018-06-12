@@ -17,6 +17,7 @@ Loading frequently-used packages with `library()`
 I always load my frequently-used packages at the top of each script.
 
 ``` r
+rm(list = ls()) # clear environment
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
 
@@ -30,9 +31,9 @@ df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))
 df1
 ```
 
-    ## Source: local data table [277 x 41]
+    ## Source: local data table [277 x 38]
     ## 
-    ## # A tibble: 277 x 41
+    ## # A tibble: 277 x 38
     ##    V1     V2     V3    V4    V5    V6    V7    V8    V9    V10   condition
     ##    <chr>  <chr>  <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>    
     ##  1 Respo… Respo… Name  Exte… Emai… IPAd… Stat… Star… EndD… Fini… condition
@@ -45,23 +46,22 @@ df1
     ##  8 R_1dd… Defau… Anon… ""    ""    86.1… 0     2015… 2015… 1     interven…
     ##  9 R_ZBR… Defau… Anon… ""    ""    86.1… 0     2015… 2015… 1     interven…
     ## 10 R_24i… Defau… Anon… ""    ""    31.5… 0     2015… 2015… 1     interven…
-    ## # ... with 267 more rows, and 30 more variables: InterInfo <chr>,
-    ## #   consentI <chr>, ContrInfo <chr>, consentC <chr>, Q9 <chr>, id <chr>,
-    ## #   Q10 <chr>, MalleableC_1 <chr>, MalleableC_2 <chr>, MalleableC_3 <chr>,
-    ## #   MalleableC_4 <chr>, Expect_1 <chr>, Expect_2 <chr>, Expect_3 <chr>,
-    ## #   ImplicitB_1 <chr>, ImplicitB_2 <chr>, ImplicitB_3 <chr>,
-    ## #   ImplicitB_4 <chr>, ImplicitB_5 <chr>, ImplicitB_6 <chr>,
-    ## #   Workload_1 <chr>, Workload_2 <chr>, Workload_3 <chr>,
-    ## #   Workload_4 <chr>, Workload_5 <chr>, Workload_6 <chr>, Q10 <chr>,
-    ## #   LocationLatitude <chr>, LocationLongitude <chr>,
-    ## #   LocationAccuracy <chr>
+    ## # ... with 267 more rows, and 27 more variables: consentI <chr>,
+    ## #   ContrInfo <chr>, ID <chr>, consentC <chr>, MalleableC_1 <chr>,
+    ## #   MalleableC_2 <chr>, MalleableC_3 <chr>, MalleableC_4 <chr>,
+    ## #   Expect_1 <chr>, Expect_2 <chr>, Expect_3 <chr>, ImplicitB_1 <chr>,
+    ## #   ImplicitB_2 <chr>, ImplicitB_3 <chr>, ImplicitB_4 <chr>,
+    ## #   ImplicitB_5 <chr>, ImplicitB_6 <chr>, Workload_1 <chr>,
+    ## #   Workload_2 <chr>, Workload_3 <chr>, Workload_4 <chr>,
+    ## #   Workload_5 <chr>, Workload_6 <chr>, Q10 <chr>, LocationLatitude <chr>,
+    ## #   LocationLongitude <chr>, LocationAccuracy <chr>
 
 ``` r
-glimpse(df1)
+glimpse(df1) # something looks weird and wrong!
 ```
 
     ## Observations: 277
-    ## Variables: 41
+    ## Variables: 38
     ## $ V1                <chr> "ResponseID", "R_1eCQEdLmpgjpFwK", "R_DNWzxi...
     ## $ V2                <chr> "ResponseSet", "Default Response Set", "Defa...
     ## $ V3                <chr> "Name", "Anonymous", "Anonymous", "Anonymous...
@@ -73,13 +73,10 @@ glimpse(df1)
     ## $ V9                <chr> "EndDate", "2015-03-12 19:44", "2015-03-12 2...
     ## $ V10               <chr> "Finished", "1", "1", "1", "1", "1", "1", "1...
     ## $ condition         <chr> "condition", "control", "control", "interven...
-    ## $ InterInfo         <chr> "Thanks for your interest in the study! Befo...
     ## $ consentI          <chr> "Consent", "", "", "1", "1", "", "", "1", "1...
     ## $ ContrInfo         <chr> "Thanks for your interest in the study! Befo...
+    ## $ ID                <chr> "ID", "1", "2", "3", "4", "5", "6", "7", "8"...
     ## $ consentC          <chr> "Consent", "1", "1", "", "", "1", "1", "", "...
-    ## $ Q9                <chr> "Email Address /  / Thank you for agreeing t...
-    ## $ id                <chr> "Enter your email below (we will be emailing...
-    ## $ Q10               <chr> "Thanks for providing your email address. If...
     ## $ MalleableC_1      <chr> "Answer the questions below using the scale ...
     ## $ MalleableC_2      <chr> "Answer the questions below using the scale ...
     ## $ MalleableC_3      <chr> "Answer the questions below using the scale ...
@@ -109,14 +106,14 @@ With Qualtrics datasets, the first row (or even first few rows) of the dataset m
 In this example, row 1 contains extra data (the actual questions themselves), so we're removing it.
 
 ``` r
-df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))[-1] # delete row 1
+df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv", header = T))[-1] # delete row 1
 # df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))[-c(1:5)] # delete rows 1:5 (example)
 df1
 ```
 
-    ## Source: local data table [276 x 41]
+    ## Source: local data table [276 x 38]
     ## 
-    ## # A tibble: 276 x 41
+    ## # A tibble: 276 x 38
     ##    V1     V2     V3    V4    V5    V6    V7    V8    V9    V10   condition
     ##    <chr>  <chr>  <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>    
     ##  1 R_1eC… Defau… Anon… ""    ""    139.… 0     2015… 2015… 1     control  
@@ -129,23 +126,22 @@ df1
     ##  8 R_ZBR… Defau… Anon… ""    ""    86.1… 0     2015… 2015… 1     interven…
     ##  9 R_24i… Defau… Anon… ""    ""    31.5… 0     2015… 2015… 1     interven…
     ## 10 R_3KB… Defau… Anon… ""    ""    139.… 0     2015… 2015… 1     interven…
-    ## # ... with 266 more rows, and 30 more variables: InterInfo <chr>,
-    ## #   consentI <chr>, ContrInfo <chr>, consentC <chr>, Q9 <chr>, id <chr>,
-    ## #   Q10 <chr>, MalleableC_1 <chr>, MalleableC_2 <chr>, MalleableC_3 <chr>,
-    ## #   MalleableC_4 <chr>, Expect_1 <chr>, Expect_2 <chr>, Expect_3 <chr>,
-    ## #   ImplicitB_1 <chr>, ImplicitB_2 <chr>, ImplicitB_3 <chr>,
-    ## #   ImplicitB_4 <chr>, ImplicitB_5 <chr>, ImplicitB_6 <chr>,
-    ## #   Workload_1 <chr>, Workload_2 <chr>, Workload_3 <chr>,
-    ## #   Workload_4 <chr>, Workload_5 <chr>, Workload_6 <chr>, Q10 <chr>,
-    ## #   LocationLatitude <chr>, LocationLongitude <chr>,
-    ## #   LocationAccuracy <chr>
+    ## # ... with 266 more rows, and 27 more variables: consentI <chr>,
+    ## #   ContrInfo <chr>, ID <chr>, consentC <chr>, MalleableC_1 <chr>,
+    ## #   MalleableC_2 <chr>, MalleableC_3 <chr>, MalleableC_4 <chr>,
+    ## #   Expect_1 <chr>, Expect_2 <chr>, Expect_3 <chr>, ImplicitB_1 <chr>,
+    ## #   ImplicitB_2 <chr>, ImplicitB_3 <chr>, ImplicitB_4 <chr>,
+    ## #   ImplicitB_5 <chr>, ImplicitB_6 <chr>, Workload_1 <chr>,
+    ## #   Workload_2 <chr>, Workload_3 <chr>, Workload_4 <chr>,
+    ## #   Workload_5 <chr>, Workload_6 <chr>, Q10 <chr>, LocationLatitude <chr>,
+    ## #   LocationLongitude <chr>, LocationAccuracy <chr>
 
 ``` r
 glimpse(df1)
 ```
 
     ## Observations: 276
-    ## Variables: 41
+    ## Variables: 38
     ## $ V1                <chr> "R_1eCQEdLmpgjpFwK", "R_DNWzxibw4F3jzKp", "R...
     ## $ V2                <chr> "Default Response Set", "Default Response Se...
     ## $ V3                <chr> "Anonymous", "Anonymous", "Anonymous", "Anon...
@@ -157,13 +153,10 @@ glimpse(df1)
     ## $ V9                <chr> "2015-03-12 19:44", "2015-03-12 22:07", "201...
     ## $ V10               <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1",...
     ## $ condition         <chr> "control", "control", "intervention", "inter...
-    ## $ InterInfo         <chr> "", "", "1", "1", "", "", "1", "1", "1", "1"...
     ## $ consentI          <chr> "", "", "1", "1", "", "", "1", "1", "1", "1"...
     ## $ ContrInfo         <chr> "1", "1", "", "", "1", "1", "", "", "", "", ...
+    ## $ ID                <chr> "1", "2", "3", "4", "5", "6", "7", "8", "9",...
     ## $ consentC          <chr> "1", "1", "", "", "1", "1", "", "", "", "", ...
-    ## $ Q9                <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1",...
-    ## $ id                <chr> "1", "2", "3", "4", "5", "6", "7", "8", "9",...
-    ## $ Q10               <chr> "1", "1", "1", "1", "1", "1", "1", "1", "1",...
     ## $ MalleableC_1      <chr> "2", "6", "5", "5", "2", "5", "6", "5", "6",...
     ## $ MalleableC_2      <chr> "4", "6", "5", "5", "2", "6", "6", "5", "6",...
     ## $ MalleableC_3      <chr> "4", "1", "2", "2", "3", "2", "1", "1", "2",...
@@ -195,22 +188,21 @@ names(df1)
     ##  [1] "V1"                "V2"                "V3"               
     ##  [4] "V4"                "V5"                "V6"               
     ##  [7] "V7"                "V8"                "V9"               
-    ## [10] "V10"               "condition"         "InterInfo"        
-    ## [13] "consentI"          "ContrInfo"         "consentC"         
-    ## [16] "Q9"                "id"                "Q10"              
-    ## [19] "MalleableC_1"      "MalleableC_2"      "MalleableC_3"     
-    ## [22] "MalleableC_4"      "Expect_1"          "Expect_2"         
-    ## [25] "Expect_3"          "ImplicitB_1"       "ImplicitB_2"      
-    ## [28] "ImplicitB_3"       "ImplicitB_4"       "ImplicitB_5"      
-    ## [31] "ImplicitB_6"       "Workload_1"        "Workload_2"       
-    ## [34] "Workload_3"        "Workload_4"        "Workload_5"       
-    ## [37] "Workload_6"        "Q10"               "LocationLatitude" 
-    ## [40] "LocationLongitude" "LocationAccuracy"
+    ## [10] "V10"               "condition"         "consentI"         
+    ## [13] "ContrInfo"         "ID"                "consentC"         
+    ## [16] "MalleableC_1"      "MalleableC_2"      "MalleableC_3"     
+    ## [19] "MalleableC_4"      "Expect_1"          "Expect_2"         
+    ## [22] "Expect_3"          "ImplicitB_1"       "ImplicitB_2"      
+    ## [25] "ImplicitB_3"       "ImplicitB_4"       "ImplicitB_5"      
+    ## [28] "ImplicitB_6"       "Workload_1"        "Workload_2"       
+    ## [31] "Workload_3"        "Workload_4"        "Workload_5"       
+    ## [34] "Workload_6"        "Q10"               "LocationLatitude" 
+    ## [37] "LocationLongitude" "LocationAccuracy"
 
 Cleaning data. If my id variable is all in numbers, I often make sure they are numerics!
 
 ``` r
-df1$id # not numeric
+df1$ID # not numeric
 ```
 
     ##   [1] "1"   "2"   "3"   "4"   "5"   "6"   "7"   "8"   "9"   "10"  "11" 
@@ -243,7 +235,7 @@ df1$id # not numeric
 Convert to numerics by applying the `as.numeric()` function
 
 ``` r
-df1[, id := as.numeric(id)] 
+df1[, ID := as.numeric(ID)] 
 ```
 
 Select questionnaire items for relability analysis
@@ -1030,14 +1022,14 @@ Select data. Make sure the first column is subject id, and subsequent columns ar
 -   select items of a particular scale
 
 ``` r
-scale_implicitBeliefs <- select(df1, id, starts_with("ImplicitB"))
+scale_implicitBeliefs <- select(df1, ID, starts_with("ImplicitB"))
 scale_implicitBeliefs
 ```
 
     ## Source: local data table [276 x 7]
     ## 
     ## # A tibble: 276 x 7
-    ##       id ImplicitB_1 ImplicitB_2 ImplicitB_3 ImplicitB_4 ImplicitB_5
+    ##       ID ImplicitB_1 ImplicitB_2 ImplicitB_3 ImplicitB_4 ImplicitB_5
     ##    <dbl> <chr>       <chr>       <chr>       <chr>       <chr>      
     ##  1     1 1           1           6           6           4          
     ##  2     2 6           6           3           2           6          
@@ -1061,7 +1053,7 @@ scale_implicitBeliefs
     ## Source: local data table [276 x 7]
     ## 
     ## # A tibble: 276 x 7
-    ##       id ImplicitB_1 ImplicitB_2 ImplicitB_3 ImplicitB_4 ImplicitB_5
+    ##       ID ImplicitB_1 ImplicitB_2 ImplicitB_3 ImplicitB_4 ImplicitB_5
     ##    <dbl>       <dbl>       <dbl>       <dbl>       <dbl>       <dbl>
     ##  1     1           1           1           6           6           4
     ##  2     2           6           6           3           2           6
@@ -1234,14 +1226,14 @@ Select data. Make sure the first column is subject id, and subsequent columns ar
 -   select items of a particular scale
 
 ``` r
-scale_workload <- select(df1, id, starts_with("Workload"))
+scale_workload <- select(df1, ID, starts_with("Workload"))
 scale_workload
 ```
 
     ## Source: local data table [276 x 7]
     ## 
     ## # A tibble: 276 x 7
-    ##       id Workload_1 Workload_2 Workload_3 Workload_4 Workload_5 Workload_6
+    ##       ID Workload_1 Workload_2 Workload_3 Workload_4 Workload_5 Workload_6
     ##    <dbl> <chr>      <chr>      <chr>      <chr>      <chr>      <chr>     
     ##  1     1 16         12         17         14         16         19        
     ##  2     2 18         18         10         19         11         13        

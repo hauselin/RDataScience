@@ -272,7 +272,6 @@ ggplot(df1, aes(class, iq)) + # y: iq
     stat_summary(fun.data = mean_cl_normal, geom = 'errorbar', width = 0, size = 1) # apply mean_cl_normal function to data
 ```
 
-
 ## Facets for grouping: `facet_wrap()` and `facet_grid()`
 
 Randomly assign gender to each row (see previous tutorial for detailed explanation of the code below)
@@ -551,7 +550,7 @@ class a vs. class d
 ```{r}
 ttest_classAD <- t.test(iq ~ class, data = df1[class %in% c("a", "d")]) # data.table subsetting
 ttest_classAD
-summaryh(ttest_classAD, showEffectSizesTable = T) # show all other effect sizes
+summaryh(ttest_classAD, showTable = T) # show all other effect sizes
 ```
 
 ### Multi-level (hierarchical) model with `lmer()` from the `lme4` package

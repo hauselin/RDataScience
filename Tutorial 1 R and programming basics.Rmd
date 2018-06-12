@@ -8,7 +8,7 @@ output:
         # theme: lumen
         # highlight: tango
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ## What is data science?
@@ -384,7 +384,7 @@ mean(na.rm = T, x = numbers) # does this work?
 ```
 
 ```{r}
-mean(numbers, na.rm = T) # does this work?
+mean(numbers, na.rm = T) # does this work? 
 ```
 
 ```{r}

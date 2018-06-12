@@ -16,6 +16,7 @@ editor_options:
 I always load my frequently-used packages at the top of each script.
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
+rm(list = ls()) # clear environment
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
 
@@ -26,7 +27,7 @@ Here's a raw dataset collected using Qualtrics
 ```{r}
 df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))
 df1
-glimpse(df1)
+glimpse(df1) # something looks weird and wrong!
 ```
 
 With Qualtrics datasets, the first row (or even first few rows) of the dataset might contain irrelevant variables and information. If they contain extra rows, do the following to get rid of rows (commented out for now). But play with your dataset to see which rows you should remove.
@@ -34,7 +35,7 @@ With Qualtrics datasets, the first row (or even first few rows) of the dataset m
 In this example, row 1 contains extra data (the actual questions themselves), so we're removing it. 
 
 ```{r}
-df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))[-1] # delete row 1
+df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv", header = T))[-1] # delete row 1
 # df1 <- tbl_dt(fread("./Data/qualtricsSurvey.csv"))[-c(1:5)] # delete rows 1:5 (example)
 df1
 glimpse(df1)
@@ -44,13 +45,13 @@ names(df1)
 Cleaning data. If my id variable is all in numbers, I often make sure they are numerics!
 
 ```{r}
-df1$id # not numeric
+df1$ID # not numeric
 ```
 
 Convert to numerics by applying the `as.numeric()` function
 
 ```{r}
-df1[, id := as.numeric(id)] 
+df1[, ID := as.numeric(ID)] 
 ```
 
 ## Select questionnaire items for relability analysis
@@ -116,7 +117,7 @@ Select data. Make sure the first column is subject id, and subsequent columns ar
 * select items of a particular scale
 
 ```{r}
-scale_implicitBeliefs <- select(df1, id, starts_with("ImplicitB"))
+scale_implicitBeliefs <- select(df1, ID, starts_with("ImplicitB"))
 scale_implicitBeliefs
 ```
 
@@ -193,7 +194,7 @@ Select data. Make sure the first column is subject id, and subsequent columns ar
 * select items of a particular scale
 
 ```{r}
-scale_workload <- select(df1, id, starts_with("Workload"))
+scale_workload <- select(df1, ID, starts_with("Workload"))
 scale_workload
 ```
 

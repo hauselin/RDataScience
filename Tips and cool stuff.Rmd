@@ -8,14 +8,27 @@ output:
         # theme: lumen
         # highlight: tango
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ```{r loading packages, results="hide", message=FALSE, warning=FALSE}
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
+source("/Users/Hause/Dropbox/Working Datasets/functionsR/helperFunctions.R")
 ```
 
-![Long to wide form](./Extra/long_to_wide.png)
+## Interactions 
 
+```{r}
+m <- lm(mpg ~ cyl * disp + wt * qsec, data = mtcars)
+m <- lm(mpg ~ cyl * disp * wt * qsec, data = mtcars)
+summaryh(m)
 
-![Caption](./Extra/set_working_directory.mov)
+library(sjPlot)
+plot_model(m, type = 'pred', terms = c("disp"))
+plot_model(m, type = "int", mdrt.values = "meansd") # mean and plus/minus one sd
+```
+
+## Interaction resources
+
+* [link 1](https://cran.r-project.org/web/packages/sjPlot/vignettes/plot_interactions.html)
+* [link 2](http://www.strengejacke.de/sjPlot/articles/plot_interactions.html)

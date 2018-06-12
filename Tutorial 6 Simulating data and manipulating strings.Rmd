@@ -76,7 +76,6 @@ Find matching patterns
 ```{r}
 text <- c("foot","lefroo", "bafOobar", "zeb")
 grep(pattern = "oo", x = text, ignore.case = T)
-grep(pattern = "oo", x = text, ignore.case = F)
 grepl(pattern = "oo", x = text, ignore.case = T)
 grepl(pattern = "oo", x = text, ignore.case = F)
 ```
