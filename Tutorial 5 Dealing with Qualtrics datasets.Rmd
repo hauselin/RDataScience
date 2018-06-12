@@ -261,5 +261,3 @@ To read that back into R later on, use `load()`
 load("analysis_scales.Rdata") # read .rds file in your current directory into R
 ```
 
-
-

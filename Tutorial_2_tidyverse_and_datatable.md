@@ -1789,12 +1789,12 @@ Randomly generate gender of student for each row of data with `sample()`
 sample(x = c("female", "male"), size = 40, replace = T) # what is this doing
 ```
 
-    ##  [1] "male"   "male"   "male"   "male"   "male"   "male"   "male"  
-    ##  [8] "male"   "female" "female" "female" "female" "female" "male"  
-    ## [15] "female" "female" "male"   "female" "female" "male"   "male"  
-    ## [22] "female" "female" "male"   "male"   "male"   "male"   "male"  
-    ## [29] "female" "female" "female" "female" "female" "male"   "female"
-    ## [36] "male"   "female" "female" "male"   "male"
+    ##  [1] "male"   "female" "male"   "female" "female" "female" "male"  
+    ##  [8] "male"   "female" "male"   "male"   "male"   "male"   "male"  
+    ## [15] "male"   "male"   "male"   "female" "male"   "female" "female"
+    ## [22] "male"   "male"   "male"   "male"   "male"   "female" "male"  
+    ## [29] "male"   "female" "female" "female" "male"   "female" "male"  
+    ## [36] "female" "male"   "male"   "female" "male"
 
 ``` r
 df4$gender <- sample(x = c("female", "male"), size = 40, replace = T)
@@ -1813,44 +1813,44 @@ print(df4, n = Inf)
     ##       iq grades class gender
     ##    <dbl>  <dbl> <chr> <chr> 
     ##  1  94.5   67.9 a     male  
-    ##  2  95.4   82.5 a     male  
-    ##  3  97.8   69.1 a     female
+    ##  2  95.4   82.5 a     female
+    ##  3  97.8   69.1 a     male  
     ##  4  98.1   83.3 a     female
-    ##  5  96.6   99.1 a     female
-    ##  6 102.    89.9 a     male  
-    ##  7 101.    73.7 a     female
+    ##  5  96.6   99.1 a     male  
+    ##  6 102.    89.9 a     female
+    ##  7 101.    73.7 a     male  
     ##  8  97.1   47.9 a     male  
-    ##  9  94.2   55.6 a     male  
-    ## 10  94.4   44.5 a     female
-    ## 11 104.    74.1 b     female
+    ##  9  94.2   55.6 a     female
+    ## 10  94.4   44.5 a     male  
+    ## 11 104.    74.1 b     male  
     ## 12 103.    59.9 b     male  
-    ## 13 102.    47.9 b     female
-    ## 14 105.    44.9 b     male  
+    ## 13 102.    47.9 b     male  
+    ## 14 105.    44.9 b     female
     ## 15 106.    60.2 b     female
     ## 16 109.    64.9 b     male  
-    ## 17 107.    74.5 b     male  
+    ## 17 107.    74.5 b     female
     ## 18 107.    49.9 b     male  
     ## 19 102.    37.9 b     male  
-    ## 20 100.    54.9 b     female
-    ## 21 111.    56.0 c     male  
+    ## 20 100.    54.9 b     male  
+    ## 21 111.    56.0 c     female
     ## 22 115.    56.0 c     female
     ## 23 112.    46.4 c     female
-    ## 24 109.    43.7 c     female
+    ## 24 109.    43.7 c     male  
     ## 25 111.    36.4 c     female
     ## 26 114.    30.2 c     male  
-    ## 27 115.    39.5 c     male  
-    ## 28 119.    51.0 c     male  
+    ## 27 115.    39.5 c     female
+    ## 28 119.    51.0 c     female
     ## 29 113.    64.1 c     male  
-    ## 30 118     55.3 c     female
+    ## 30 118     55.3 c     male  
     ## 31 117.    17.5 d     female
     ## 32 121.    35.2 d     male  
     ## 33 118.    29.9 d     female
-    ## 34 122.    18.3 d     female
+    ## 34 122.    18.3 d     male  
     ## 35 124.    29.5 d     male  
     ## 36 121.    53.7 d     male  
-    ## 37 124.    63.7 d     female
+    ## 37 124.    63.7 d     male  
     ## 38 125.    48.7 d     male  
-    ## 39 125.    38.3 d     male  
+    ## 39 125.    38.3 d     female
     ## 40 128.    51.8 d     male
 
 Compute mean for each class by gender
@@ -1868,14 +1868,14 @@ df4 %>%
     ## # A tibble: 8 x 4
     ##   class gender iqClassMean examGradesClassMean
     ##   <chr> <chr>        <dbl>               <dbl>
-    ## 1 a     male          96.6                68.8
-    ## 2 a     female        97.5                73.9
-    ## 3 b     female       103.                 59.3
-    ## 4 b     male         106.                 55.3
-    ## 5 c     male         114.                 48.2
-    ## 6 c     female       113.                 47.6
-    ## 7 d     female       120.                 32.4
-    ## 8 d     male         124.                 42.9
+    ## 1 a     male          96.9                67.0
+    ## 2 a     female        97.3                77.8
+    ## 3 b     male         104.                 55.6
+    ## 4 b     female       106.                 59.9
+    ## 5 c     female       114.                 47.5
+    ## 6 c     male         113.                 48.3
+    ## 7 d     female       120.                 28.6
+    ## 8 d     male         123.                 43.0
 
 More `dplyr` and `tidyverse` information
 ----------------------------------------
@@ -1903,15 +1903,15 @@ df4
     ##       iq grades class gender
     ##    <dbl>  <dbl> <chr> <chr> 
     ##  1  94.5   67.9 a     male  
-    ##  2  95.4   82.5 a     male  
-    ##  3  97.8   69.1 a     female
+    ##  2  95.4   82.5 a     female
+    ##  3  97.8   69.1 a     male  
     ##  4  98.1   83.3 a     female
-    ##  5  96.6   99.1 a     female
-    ##  6 102.    89.9 a     male  
-    ##  7 101.    73.7 a     female
+    ##  5  96.6   99.1 a     male  
+    ##  6 102.    89.9 a     female
+    ##  7 101.    73.7 a     male  
     ##  8  97.1   47.9 a     male  
-    ##  9  94.2   55.6 a     male  
-    ## 10  94.4   44.5 a     female
+    ##  9  94.2   55.6 a     female
+    ## 10  94.4   44.5 a     male  
     ## # ... with 30 more rows
 
 ``` r
@@ -1990,44 +1990,44 @@ print(df4, n = Inf) # remind yourself what your data look like
     ##       iq grades class gender
     ##    <dbl>  <dbl> <chr> <chr> 
     ##  1  94.5   67.9 a     male  
-    ##  2  95.4   82.5 a     male  
-    ##  3  97.8   69.1 a     female
+    ##  2  95.4   82.5 a     female
+    ##  3  97.8   69.1 a     male  
     ##  4  98.1   83.3 a     female
-    ##  5  96.6   99.1 a     female
-    ##  6 102.    89.9 a     male  
-    ##  7 101.    73.7 a     female
+    ##  5  96.6   99.1 a     male  
+    ##  6 102.    89.9 a     female
+    ##  7 101.    73.7 a     male  
     ##  8  97.1   47.9 a     male  
-    ##  9  94.2   55.6 a     male  
-    ## 10  94.4   44.5 a     female
-    ## 11 104.    74.1 b     female
+    ##  9  94.2   55.6 a     female
+    ## 10  94.4   44.5 a     male  
+    ## 11 104.    74.1 b     male  
     ## 12 103.    59.9 b     male  
-    ## 13 102.    47.9 b     female
-    ## 14 105.    44.9 b     male  
+    ## 13 102.    47.9 b     male  
+    ## 14 105.    44.9 b     female
     ## 15 106.    60.2 b     female
     ## 16 109.    64.9 b     male  
-    ## 17 107.    74.5 b     male  
+    ## 17 107.    74.5 b     female
     ## 18 107.    49.9 b     male  
     ## 19 102.    37.9 b     male  
-    ## 20 100.    54.9 b     female
-    ## 21 111.    56.0 c     male  
+    ## 20 100.    54.9 b     male  
+    ## 21 111.    56.0 c     female
     ## 22 115.    56.0 c     female
     ## 23 112.    46.4 c     female
-    ## 24 109.    43.7 c     female
+    ## 24 109.    43.7 c     male  
     ## 25 111.    36.4 c     female
     ## 26 114.    30.2 c     male  
-    ## 27 115.    39.5 c     male  
-    ## 28 119.    51.0 c     male  
+    ## 27 115.    39.5 c     female
+    ## 28 119.    51.0 c     female
     ## 29 113.    64.1 c     male  
-    ## 30 118     55.3 c     female
+    ## 30 118     55.3 c     male  
     ## 31 117.    17.5 d     female
     ## 32 121.    35.2 d     male  
     ## 33 118.    29.9 d     female
-    ## 34 122.    18.3 d     female
+    ## 34 122.    18.3 d     male  
     ## 35 124.    29.5 d     male  
     ## 36 121.    53.7 d     male  
-    ## 37 124.    63.7 d     female
+    ## 37 124.    63.7 d     male  
     ## 38 125.    48.7 d     male  
-    ## 39 125.    38.3 d     male  
+    ## 39 125.    38.3 d     female
     ## 40 128.    51.8 d     male
 
 ``` r
@@ -2042,71 +2042,69 @@ Different ways to filter via i
 df4[i = gender == 'female',] # just female (j, by are NULL)
 ```
 
-    ## Source: local data table [18 x 4]
+    ## Source: local data table [16 x 4]
     ## 
-    ## # A tibble: 18 x 4
+    ## # A tibble: 16 x 4
     ##       iq grades class gender
     ##    <dbl>  <dbl> <chr> <chr> 
-    ##  1  97.8   69.1 a     female
+    ##  1  95.4   82.5 a     female
     ##  2  98.1   83.3 a     female
-    ##  3  96.6   99.1 a     female
-    ##  4 101.    73.7 a     female
-    ##  5  94.4   44.5 a     female
-    ##  6 104.    74.1 b     female
-    ##  7 102.    47.9 b     female
-    ##  8 106.    60.2 b     female
-    ##  9 100.    54.9 b     female
-    ## 10 115.    56.0 c     female
-    ## 11 112.    46.4 c     female
-    ## 12 109.    43.7 c     female
-    ## 13 111.    36.4 c     female
-    ## 14 118     55.3 c     female
-    ## 15 117.    17.5 d     female
-    ## 16 118.    29.9 d     female
-    ## 17 122.    18.3 d     female
-    ## 18 124.    63.7 d     female
+    ##  3 102.    89.9 a     female
+    ##  4  94.2   55.6 a     female
+    ##  5 105.    44.9 b     female
+    ##  6 106.    60.2 b     female
+    ##  7 107.    74.5 b     female
+    ##  8 111.    56.0 c     female
+    ##  9 115.    56.0 c     female
+    ## 10 112.    46.4 c     female
+    ## 11 111.    36.4 c     female
+    ## 12 115.    39.5 c     female
+    ## 13 119.    51.0 c     female
+    ## 14 117.    17.5 d     female
+    ## 15 118.    29.9 d     female
+    ## 16 125.    38.3 d     female
 
 ``` r
 df4[i = gender != 'female',] # not female 
 ```
 
-    ## Source: local data table [22 x 4]
+    ## Source: local data table [24 x 4]
     ## 
-    ## # A tibble: 22 x 4
+    ## # A tibble: 24 x 4
     ##       iq grades class gender
     ##    <dbl>  <dbl> <chr> <chr> 
     ##  1  94.5   67.9 a     male  
-    ##  2  95.4   82.5 a     male  
-    ##  3 102.    89.9 a     male  
-    ##  4  97.1   47.9 a     male  
-    ##  5  94.2   55.6 a     male  
-    ##  6 103.    59.9 b     male  
-    ##  7 105.    44.9 b     male  
-    ##  8 109.    64.9 b     male  
-    ##  9 107.    74.5 b     male  
-    ## 10 107.    49.9 b     male  
-    ## # ... with 12 more rows
+    ##  2  97.8   69.1 a     male  
+    ##  3  96.6   99.1 a     male  
+    ##  4 101.    73.7 a     male  
+    ##  5  97.1   47.9 a     male  
+    ##  6  94.4   44.5 a     male  
+    ##  7 104.    74.1 b     male  
+    ##  8 103.    59.9 b     male  
+    ##  9 102.    47.9 b     male  
+    ## 10 109.    64.9 b     male  
+    ## # ... with 14 more rows
 
 ``` r
 df4[gender != 'female',] # also works
 ```
 
-    ## Source: local data table [22 x 4]
+    ## Source: local data table [24 x 4]
     ## 
-    ## # A tibble: 22 x 4
+    ## # A tibble: 24 x 4
     ##       iq grades class gender
     ##    <dbl>  <dbl> <chr> <chr> 
     ##  1  94.5   67.9 a     male  
-    ##  2  95.4   82.5 a     male  
-    ##  3 102.    89.9 a     male  
-    ##  4  97.1   47.9 a     male  
-    ##  5  94.2   55.6 a     male  
-    ##  6 103.    59.9 b     male  
-    ##  7 105.    44.9 b     male  
-    ##  8 109.    64.9 b     male  
-    ##  9 107.    74.5 b     male  
-    ## 10 107.    49.9 b     male  
-    ## # ... with 12 more rows
+    ##  2  97.8   69.1 a     male  
+    ##  3  96.6   99.1 a     male  
+    ##  4 101.    73.7 a     male  
+    ##  5  97.1   47.9 a     male  
+    ##  6  94.4   44.5 a     male  
+    ##  7 104.    74.1 b     male  
+    ##  8 103.    59.9 b     male  
+    ##  9 102.    47.9 b     male  
+    ## 10 109.    64.9 b     male  
+    ## # ... with 14 more rows
 
 ``` r
 df4[grades > 85,] # also works
@@ -2117,8 +2115,8 @@ df4[grades > 85,] # also works
     ## # A tibble: 2 x 4
     ##      iq grades class gender
     ##   <dbl>  <dbl> <chr> <chr> 
-    ## 1  96.6   99.1 a     female
-    ## 2 102.    89.9 a     male
+    ## 1  96.6   99.1 a     male  
+    ## 2 102.    89.9 a     female
 
 ``` r
 # same as filter(df4, grades > 85), but much more concise
@@ -2130,8 +2128,8 @@ df4[grades > 85] # also works
     ## # A tibble: 2 x 4
     ##      iq grades class gender
     ##   <dbl>  <dbl> <chr> <chr> 
-    ## 1  96.6   99.1 a     female
-    ## 2 102.    89.9 a     male
+    ## 1  96.6   99.1 a     male  
+    ## 2 102.    89.9 a     female
 
 ``` r
 df4[i = grades > 85] # also works
@@ -2142,8 +2140,8 @@ df4[i = grades > 85] # also works
     ## # A tibble: 2 x 4
     ##      iq grades class gender
     ##   <dbl>  <dbl> <chr> <chr> 
-    ## 1  96.6   99.1 a     female
-    ## 2 102.    89.9 a     male
+    ## 1  96.6   99.1 a     male  
+    ## 2 102.    89.9 a     female
 
 ``` r
 df4[grades < 50 & iq > 120] # smart but (AND &) lazy people (grades < 50 AND iq > 120)
@@ -2155,10 +2153,10 @@ df4[grades < 50 & iq > 120] # smart but (AND &) lazy people (grades < 50 AND iq 
     ##      iq grades class gender
     ##   <dbl>  <dbl> <chr> <chr> 
     ## 1  121.   35.2 d     male  
-    ## 2  122.   18.3 d     female
+    ## 2  122.   18.3 d     male  
     ## 3  124.   29.5 d     male  
     ## 4  125.   48.7 d     male  
-    ## 5  125.   38.3 d     male
+    ## 5  125.   38.3 d     female
 
 ``` r
 df4[grades < 50 | iq > 120] # smart but OR lazy people (grades < 50 OR iq > 120)
@@ -2170,13 +2168,13 @@ df4[grades < 50 | iq > 120] # smart but OR lazy people (grades < 50 OR iq > 120)
     ##       iq grades class gender
     ##    <dbl>  <dbl> <chr> <chr> 
     ##  1  97.1   47.9 a     male  
-    ##  2  94.4   44.5 a     female
-    ##  3 102.    47.9 b     female
-    ##  4 105.    44.9 b     male  
+    ##  2  94.4   44.5 a     male  
+    ##  3 102.    47.9 b     male  
+    ##  4 105.    44.9 b     female
     ##  5 107.    49.9 b     male  
     ##  6 102.    37.9 b     male  
     ##  7 112.    46.4 c     female
-    ##  8 109.    43.7 c     female
+    ##  8 109.    43.7 c     male  
     ##  9 111.    36.4 c     female
     ## 10 114.    30.2 c     male  
     ## # ... with 11 more rows
@@ -2193,8 +2191,8 @@ df4[1:3] # rows 1 to 3
     ##      iq grades class gender
     ##   <dbl>  <dbl> <chr> <chr> 
     ## 1  94.5   67.9 a     male  
-    ## 2  95.4   82.5 a     male  
-    ## 3  97.8   69.1 a     female
+    ## 2  95.4   82.5 a     female
+    ## 3  97.8   69.1 a     male
 
 ``` r
 df4[35:.N] # rows 35 to last row
@@ -2207,9 +2205,9 @@ df4[35:.N] # rows 35 to last row
     ##   <dbl>  <dbl> <chr> <chr> 
     ## 1  124.   29.5 d     male  
     ## 2  121.   53.7 d     male  
-    ## 3  124.   63.7 d     female
+    ## 3  124.   63.7 d     male  
     ## 4  125.   48.7 d     male  
-    ## 5  125.   38.3 d     male  
+    ## 5  125.   38.3 d     female
     ## 6  128.   51.8 d     male
 
 ### Selecting columns via j
@@ -2295,15 +2293,15 @@ df4[, j = .(grades, gender, iq)] # select multiple columns
     ##    grades gender    iq
     ##     <dbl> <chr>  <dbl>
     ##  1   67.9 male    94.5
-    ##  2   82.5 male    95.4
-    ##  3   69.1 female  97.8
+    ##  2   82.5 female  95.4
+    ##  3   69.1 male    97.8
     ##  4   83.3 female  98.1
-    ##  5   99.1 female  96.6
-    ##  6   89.9 male   102. 
-    ##  7   73.7 female 101. 
+    ##  5   99.1 male    96.6
+    ##  6   89.9 female 102. 
+    ##  7   73.7 male   101. 
     ##  8   47.9 male    97.1
-    ##  9   55.6 male    94.2
-    ## 10   44.5 female  94.4
+    ##  9   55.6 female  94.2
+    ## 10   44.5 male    94.4
     ## # ... with 30 more rows
 
 ``` r
@@ -2316,15 +2314,15 @@ df4[, .(grades,gender, iq)] # same as above and we often omit j =
     ##    grades gender    iq
     ##     <dbl> <chr>  <dbl>
     ##  1   67.9 male    94.5
-    ##  2   82.5 male    95.4
-    ##  3   69.1 female  97.8
+    ##  2   82.5 female  95.4
+    ##  3   69.1 male    97.8
     ##  4   83.3 female  98.1
-    ##  5   99.1 female  96.6
-    ##  6   89.9 male   102. 
-    ##  7   73.7 female 101. 
+    ##  5   99.1 male    96.6
+    ##  6   89.9 female 102. 
+    ##  7   73.7 male   101. 
     ##  8   47.9 male    97.1
-    ##  9   55.6 male    94.2
-    ## 10   44.5 female  94.4
+    ##  9   55.6 female  94.2
+    ## 10   44.5 male    94.4
     ## # ... with 30 more rows
 
 ``` r
@@ -2338,15 +2336,15 @@ df4[, grades:gender] # select grades to gender
     ##    grades class gender
     ##     <dbl> <chr> <chr> 
     ##  1   67.9 a     male  
-    ##  2   82.5 a     male  
-    ##  3   69.1 a     female
+    ##  2   82.5 a     female
+    ##  3   69.1 a     male  
     ##  4   83.3 a     female
-    ##  5   99.1 a     female
-    ##  6   89.9 a     male  
-    ##  7   73.7 a     female
+    ##  5   99.1 a     male  
+    ##  6   89.9 a     female
+    ##  7   73.7 a     male  
     ##  8   47.9 a     male  
-    ##  9   55.6 a     male  
-    ## 10   44.5 a     female
+    ##  9   55.6 a     female
+    ## 10   44.5 a     male  
     ## # ... with 30 more rows
 
 ``` r
@@ -2364,15 +2362,15 @@ df4[, c(2, 3, 4)] # via column index/number
     ##    grades class gender
     ##     <dbl> <chr> <chr> 
     ##  1   67.9 a     male  
-    ##  2   82.5 a     male  
-    ##  3   69.1 a     female
+    ##  2   82.5 a     female
+    ##  3   69.1 a     male  
     ##  4   83.3 a     female
-    ##  5   99.1 a     female
-    ##  6   89.9 a     male  
-    ##  7   73.7 a     female
+    ##  5   99.1 a     male  
+    ##  6   89.9 a     female
+    ##  7   73.7 a     male  
     ##  8   47.9 a     male  
-    ##  9   55.6 a     male  
-    ## 10   44.5 a     female
+    ##  9   55.6 a     female
+    ## 10   44.5 a     male  
     ## # ... with 30 more rows
 
 ``` r
@@ -2654,14 +2652,14 @@ df4[, .(iqMean = mean(iq, na.rm = T)), by = .(class, gender)]
     ## # A tibble: 8 x 3
     ##   class gender iqMean
     ##   <chr> <chr>   <dbl>
-    ## 1 a     male     96.6
-    ## 2 a     female   97.5
-    ## 3 b     female  103. 
-    ## 4 b     male    106. 
-    ## 5 c     male    114. 
-    ## 6 c     female  113. 
+    ## 1 a     male     96.9
+    ## 2 a     female   97.3
+    ## 3 b     male    104. 
+    ## 4 b     female  106. 
+    ## 5 c     female  114. 
+    ## 6 c     male    113. 
     ## 7 d     female  120. 
-    ## 8 d     male    124.
+    ## 8 d     male    123.
 
 ``` r
 df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and sort/arrange by class then gender
@@ -2672,14 +2670,14 @@ df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and
     ## # A tibble: 8 x 3
     ##   gender class iqMean
     ##   <chr>  <chr>  <dbl>
-    ## 1 female a       97.5
-    ## 2 female b      103. 
-    ## 3 female c      113. 
+    ## 1 female a       97.3
+    ## 2 female b      106. 
+    ## 3 female c      114. 
     ## 4 female d      120. 
-    ## 5 male   a       96.6
-    ## 6 male   b      106. 
-    ## 7 male   c      114. 
-    ## 8 male   d      124.
+    ## 5 male   a       96.9
+    ## 6 male   b      104. 
+    ## 7 male   c      113. 
+    ## 8 male   d      123.
 
 Combining pipes with `data.table` and `ggplot`
 
@@ -2765,13 +2763,13 @@ df4[is.na(iqCopy)] # filter via i (show only rows where iqCopy is NA)
     ##      iq grades class gender sex   iqCopy
     ##   <dbl>  <dbl> <chr> <chr>  <chr>  <dbl>
     ## 1  94.5   67.9 a     male   m         NA
-    ## 2  95.4   82.5 a     male   m         NA
-    ## 3  97.8   69.1 a     female f         NA
+    ## 2  95.4   82.5 a     female f         NA
+    ## 3  97.8   69.1 a     male   m         NA
     ## 4  98.1   83.3 a     female f         NA
-    ## 5  96.6   99.1 a     female f         NA
+    ## 5  96.6   99.1 a     male   m         NA
     ## 6  97.1   47.9 a     male   m         NA
-    ## 7  94.2   55.6 a     male   m         NA
-    ## 8  94.4   44.5 a     female f         NA
+    ## 7  94.2   55.6 a     female f         NA
+    ## 8  94.4   44.5 a     male   m         NA
 
 ``` r
 df4[iqCopy == NA] # DOESN'T WORK!!! use is.na()
