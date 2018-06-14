@@ -1,4 +1,4 @@
-Tutorial 4 Long and wide forms and joins
+Tutorial 4: Long and wide forms and joins
 ================
 Hause Lin
 
@@ -48,7 +48,7 @@ Create equivalent long data
 ``` r
 long <- data_frame(student = rep(c("Andy", "Mary"), each = 3),
                    class = rep(c("englishGrades", "mathGrades", "physicsGrades"), times = 2),
-                   grades = c(1, 10, 100, -2, -20, -200))
+                   grades = c(1, 10, 1000, -2, -20, -2000))
 long
 ```
 
@@ -57,10 +57,10 @@ long
     ##   <chr>   <chr>          <dbl>
     ## 1 Andy    englishGrades      1
     ## 2 Andy    mathGrades        10
-    ## 3 Andy    physicsGrades    100
+    ## 3 Andy    physicsGrades   1000
     ## 4 Mary    englishGrades     -2
     ## 5 Mary    mathGrades       -20
-    ## 6 Mary    physicsGrades   -200
+    ## 6 Mary    physicsGrades  -2000
 
 Compare wide vs long
 
@@ -83,10 +83,10 @@ long # long
     ##   <chr>   <chr>          <dbl>
     ## 1 Andy    englishGrades      1
     ## 2 Andy    mathGrades        10
-    ## 3 Andy    physicsGrades    100
+    ## 3 Andy    physicsGrades   1000
     ## 4 Mary    englishGrades     -2
     ## 5 Mary    mathGrades       -20
-    ## 6 Mary    physicsGrades   -200
+    ## 6 Mary    physicsGrades  -2000
 
 Wide to long with `melt()` (from `data.table`)
 ----------------------------------------------
@@ -122,7 +122,8 @@ melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS
 Compare with the long form we created
 
 ``` r
-melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS") %>% arrange(student, cLaSs)
+melt(wide, id.vars = c("student"), variable.name = "cLaSs", value.name = "gRaDeS") %>% 
+    arrange(student, cLaSs)
 ```
 
     ##   student         cLaSs gRaDeS
@@ -142,10 +143,10 @@ long
     ##   <chr>   <chr>          <dbl>
     ## 1 Andy    englishGrades      1
     ## 2 Andy    mathGrades        10
-    ## 3 Andy    physicsGrades    100
+    ## 3 Andy    physicsGrades   1000
     ## 4 Mary    englishGrades     -2
     ## 5 Mary    mathGrades       -20
-    ## 6 Mary    physicsGrades   -200
+    ## 6 Mary    physicsGrades  -2000
 
 Wide to long with `gather()` (from `tidyverse` and `tidyr`)
 -----------------------------------------------------------
@@ -180,8 +181,8 @@ dcast(long, student ~ class, value.var = "grades")
 ```
 
     ##   student englishGrades mathGrades physicsGrades
-    ## 1    Andy             1         10           100
-    ## 2    Mary            -2        -20          -200
+    ## 1    Andy             1         10          1000
+    ## 2    Mary            -2        -20         -2000
 
 ``` r
 wide # compare with dcast() output
@@ -205,8 +206,8 @@ spread(long, key = class, value = grades)
     ## # A tibble: 2 x 4
     ##   student englishGrades mathGrades physicsGrades
     ##   <chr>           <dbl>      <dbl>         <dbl>
-    ## 1 Andy                1         10           100
-    ## 2 Mary               -2        -20          -200
+    ## 1 Andy                1         10          1000
+    ## 2 Mary               -2        -20         -2000
 
 ``` r
 wide # compare with spread() output
@@ -268,7 +269,7 @@ rbind(wide, moreRows)
     ## 4 Jane               -5        -50            NA
 
 ``` r
-bind_rows(wide, moreRows) 
+bind_rows(wide, moreRows)
 ```
 
     ## # A tibble: 4 x 4
