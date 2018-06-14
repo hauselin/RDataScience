@@ -21,6 +21,7 @@ Loading frequently-used packages with `library()`
 I always load my frequently-used packages at the top of each script.
 
 ``` r
+rm(list = ls()) # clear environment
 library(tidyverse); library(data.table); library(broom); library(dtplyr); library(lme4); library(lmerTest); library(ggbeeswarm); library(cowplot)
 ```
 
