@@ -39,7 +39,7 @@ long <- data_frame(student = rep(c("Andy", "Mary"), each = 3),
                    class = rep(c("englishGrades", "mathGrades", "physicsGrades"), times = 2),
                    grades = c(1, 10, 1000, -2, -20, -2000))
 long
-```
+````
 
 Compare wide vs long
 

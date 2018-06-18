@@ -569,6 +569,21 @@ df4[, -c(2, 3, 4)] # via column index/number (minus/not columns 1, 3, 4)
 df4[, 1:3] # via column index/number (1 to 3)
 ```
 
+Other ways to select columns
+
+```{r}
+df4[, "grades"] # 1 column (character)
+df4[, c("grades", "iq")] # multiple columns (characters)
+```
+
+Column names are stored in an object
+
+```{r, error=TRUE}
+colNames <- c("gender", "class")
+df4[, colNames] # doesn't work!
+df4[, ..colNames] # works! (special syntax)
+```
+
 ### Chaining with `data.table` ("piping")
 
 ```{r}
@@ -647,6 +662,13 @@ Summarize by class and gender
 ```{r}
 df4[, .(iqMean = mean(iq, na.rm = T)), by = .(class, gender)]
 df4[, .(iqMean = mean(iq, na.rm = T)), keyby = .(gender, class)] # summarize and sort/arrange by class then gender
+```
+
+Summarize by booleans
+
+```{r}
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == "male")]
+df4[, .(iqMean = mean(iq, na.rm = T)), by = .(gender == "male", class == "a")]
 ```
 
 Combining pipes with `data.table` and `ggplot`
