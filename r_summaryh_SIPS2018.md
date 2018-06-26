@@ -1,31 +1,11 @@
 
 ### <https://github.com/hauselin/Rcode>
 
+#### Source or load `summaryh()` function
+
 ``` r
 source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")
 ```
-
-    ## ── Attaching packages ───────────────────────────────────────── tidyverse 1.2.1 ──
-
-    ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.5
-    ## ✔ tibble  1.4.2     ✔ dplyr   0.7.5
-    ## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
-    ## ✔ readr   1.1.1     ✔ forcats 0.3.0
-
-    ## ── Conflicts ──────────────────────────────────────────── tidyverse_conflicts() ──
-    ## ✖ dplyr::filter() masks stats::filter()
-    ## ✖ dplyr::lag()    masks stats::lag()
-
-    ## 
-    ## Attaching package: 'data.table'
-
-    ## The following objects are masked from 'package:dplyr':
-    ## 
-    ##     between, first, last
-
-    ## The following object is masked from 'package:purrr':
-    ## 
-    ##     transpose
 
     ## r: .10 (small), .30 (medium), .50 (large) (Cohen, 1992)
     ## d: 0.20 (small), 0.50 (medium), .80 (large) (Cohen, 1992)
@@ -34,28 +14,28 @@ source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")
 #### Linear regression standard R output
 
 ``` r
-model <- lm(mpg ~ cyl, mtcars)
+model <- lm(mpg ~ drat, mtcars)
 summary(model)
 ```
 
     ## 
     ## Call:
-    ## lm(formula = mpg ~ cyl, data = mtcars)
+    ## lm(formula = mpg ~ drat, data = mtcars)
     ## 
     ## Residuals:
     ##     Min      1Q  Median      3Q     Max 
-    ## -4.9814 -2.1185  0.2217  1.0717  7.5186 
+    ## -9.0775 -2.6803 -0.2095  2.2976  9.0225 
     ## 
     ## Coefficients:
     ##             Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  37.8846     2.0738   18.27  < 2e-16 ***
-    ## cyl          -2.8758     0.3224   -8.92 6.11e-10 ***
+    ## (Intercept)   -7.525      5.477  -1.374     0.18    
+    ## drat           7.678      1.507   5.096 1.78e-05 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## Residual standard error: 3.206 on 30 degrees of freedom
-    ## Multiple R-squared:  0.7262, Adjusted R-squared:  0.7171 
-    ## F-statistic: 79.56 on 1 and 30 DF,  p-value: 6.113e-10
+    ## Residual standard error: 4.485 on 30 degrees of freedom
+    ## Multiple R-squared:  0.464,  Adjusted R-squared:  0.4461 
+    ## F-statistic: 25.97 on 1 and 30 DF,  p-value: 1.776e-05
 
 #### Linear regression `summaryh()` output
 
@@ -64,23 +44,20 @@ summaryh(model)
 ```
 
     ##           term                                                 results
-    ## 1: (Intercept) b = 37.88, SE = 2.07, t(30) = 18.27, p < .001, r = 0.96
-    ## 2:         cyl b = −2.88, SE = 0.32, t(30) = −8.92, p < .001, r = 0.85
+    ## 1: (Intercept) b = −7.52, SE = 5.48, t(30) = −1.37, p = .180, r = 0.24
+    ## 2:        drat   b = 7.68, SE = 1.51, t(30) = 5.10, p < .001, r = 0.68
 
-#### Linear regression `summaryh()` output: changing default output (5 decimals)
+#### Linear regression `summaryh()` output: changing default output
 
 ``` r
-summaryh(model, decimal = 5)
+summaryh(model, decimal = 1)
 ```
 
-    ##           term
-    ## 1: (Intercept)
-    ## 2:         cyl
-    ##                                                                results
-    ## 1: b = 37.88458, SE = 2.07384, t(30) = 18.26781, p < .001, r = 0.95787
-    ## 2: b = −2.87579, SE = 0.32241, t(30) = −8.91970, p < .001, r = 0.85216
+    ##           term                                             results
+    ## 1: (Intercept) b = −7.5, SE = 5.5, t(30) = −1.4, p = .180, r = 0.2
+    ## 2:        drat   b = 7.7, SE = 1.5, t(30) = 5.1, p < .001, r = 0.7
 
-#### Linear regression `summaryh()` output: changing output
+#### Linear regression `summaryh()` output: changing default output
 
 ``` r
 summaryh(model, showTable = T)
@@ -88,16 +65,16 @@ summaryh(model, showTable = T)
 
     ## $results
     ##           term                                                 results
-    ## 1: (Intercept) b = 37.88, SE = 2.07, t(30) = 18.27, p < .001, r = 0.96
-    ## 2:         cyl b = −2.88, SE = 0.32, t(30) = −8.92, p < .001, r = 0.85
+    ## 1: (Intercept) b = −7.52, SE = 5.48, t(30) = −1.37, p = .180, r = 0.24
+    ## 2:        drat   b = 7.68, SE = 1.51, t(30) = 5.10, p < .001, r = 0.68
     ## 
     ## $results2
     ##           term estimate std.error df statistic p.value  es.r   es.d
-    ## 1: (Intercept)   37.885     2.074 30    18.268       0 0.958  6.670
-    ## 2:         cyl   -2.876     0.322 30    -8.920       0 0.852 -3.257
+    ## 1: (Intercept)   -7.525     5.477 30    -1.374    0.18 0.243 -0.502
+    ## 2:        drat    7.678     1.507 30     5.096    0.00 0.681  1.861
     ##    es.r.squared es.adj.r.squared
-    ## 1:        0.726            0.717
-    ## 2:        0.726            0.717
+    ## 1:        0.464            0.446
+    ## 2:        0.464            0.446
 
 #### Linear regression `summaryh()` output: show other effect sizes
 
@@ -107,13 +84,13 @@ summaryh(model, showEffectSizesTable = T)
 
     ## $results
     ##           term                                                 results
-    ## 1: (Intercept) b = 37.88, SE = 2.07, t(30) = 18.27, p < .001, r = 0.96
-    ## 2:         cyl b = −2.88, SE = 0.32, t(30) = −8.92, p < .001, r = 0.85
+    ## 1: (Intercept) b = −7.52, SE = 5.48, t(30) = −1.37, p = .180, r = 0.24
+    ## 2:        drat   b = 7.68, SE = 1.51, t(30) = 5.10, p < .001, r = 0.68
     ## 
     ## $effectSizes
-    ##           term    d    r   R2    f oddsratio logoddsratio auc
-    ## 1: (Intercept) 6.68 0.96 0.92 3.34 183255.49        12.12   1
-    ## 2:         cyl 3.25 0.85 0.73 1.63    366.31         5.90   1
+    ##           term    d    r   R2    f oddsratio logoddsratio  auc
+    ## 1: (Intercept) 0.50 0.24 0.06 0.25      2.48         0.91 0.69
+    ## 2:        drat 1.86 0.68 0.46 0.93     29.18         3.37 0.97
 
 #### Correlation
 
@@ -136,39 +113,16 @@ summaryh(t.test(mpg ~ vs, mtcars))
 #### ANOVA
 
 ``` r
-summaryh(aov(mpg ~ gear, mtcars), decimal = 5)
+summaryh(aov(mpg ~ gear, mtcars), decimal = 1)
 ```
 
-    ##    term                                     results
-    ## 1: gear F(1, 30) = 8.99514, p = .00540, r = 0.48028
+    ##    term                           results
+    ## 1: gear F(1, 30) = 9.0, p = .005, r = 0.5
 
 #### Multi-level/mixed effects model with lme4 and lmerTest
 
 ``` r
 library(lme4); library(lmerTest) # load packages to fit mixed effects models
-```
-
-    ## Loading required package: Matrix
-
-    ## 
-    ## Attaching package: 'Matrix'
-
-    ## The following object is masked from 'package:tidyr':
-    ## 
-    ##     expand
-
-    ## 
-    ## Attaching package: 'lmerTest'
-
-    ## The following object is masked from 'package:lme4':
-    ## 
-    ##     lmer
-
-    ## The following object is masked from 'package:stats':
-    ## 
-    ##     step
-
-``` r
 model <- lmer(weight ~ Time * Diet  + (1 + Time | Chick), data = ChickWeight)
 summaryh(model)
 ```
