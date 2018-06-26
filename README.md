@@ -2,6 +2,18 @@
 
 If you're new to R, follow the instructions below to install R and RStudio. Otherwise, if you want to check out my tutorials, follow these instructions: I've created a few tutorials (see links that end with **.md** extension) and it's highly recommended that you go through them sequentially. The corresponding **.rmd**  files are the RMarkdown files I've used to create these tutorials (check them out to see how I've created these tutorials: click on one of them and click on **Raw** to see the script). The data used in the tutorials are in the **Data** directory. To everything from my github repository, click the green **Clone or download** button at the top right. 
 
+### Tutorials
+
+* [Introduction to R and basic principles](https://github.com/hauselin/RDataScience/blob/master/Tutorial_1_R_and_programming_basics.md)
+* [tidyverse and data.table](https://github.com/hauselin/RDataScience/blob/master/Tutorial_2_tidyverse_and_datatable.md)
+* [ggplot2 and model fitting](https://github.com/hauselin/RDataScience/blob/master/Tutorial_3_ggplot2_and_model_fitting.md)
+* [Long/wide forms and joining datasets](https://github.com/hauselin/RDataScience/blob/master/Tutorial_4_Long_and_wide_forms_and_joins.md)
+* [An example analysis script (Stroop data)](https://github.com/hauselin/RDataScience/blob/master/Tutorial_with_real_Stroop_data.md)
+* [Cleaning and organizing questionnaire data (collected with Qualtrics)](https://github.com/hauselin/RDataScience/blob/master/Tutorial_5_Dealing_with_Qualtrics_datasets.md)
+* [Simulating data, manipulating strings, and other stuff](https://github.com/hauselin/RDataScience/blob/master/Tutorial_6_Simulating_data_and_manipulating_strings.md)
+
+
+
 ## Installing (or updating) R and RStudio
 
 Download R [here](https://www.r-project.org/). Follow the instructions under **Getting Started** to download R. Choose a mirror/location that is closest to you and download R for Linux, Mac, or Windows.
