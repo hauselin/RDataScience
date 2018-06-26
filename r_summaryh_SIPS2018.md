@@ -1,8 +1,4 @@
 
--   [<https://github.com/hauselin/Rcode>](#httpsgithub.comhauselinrcode)
--   [<https://github.com/hauselin/Rcode>](#httpsgithub.comhauselinrcode-1)
--   [<https://github.com/hauselin/RDataScience>](#httpsgithub.comhauselinrdatascience)
-
 ### <https://github.com/hauselin/Rcode>
 
 ``` r
