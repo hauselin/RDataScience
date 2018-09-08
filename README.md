@@ -1,6 +1,6 @@
 # Data Science with R for Psychologists
 
-If you're new to R, follow the instructions below to install R and RStudio. Otherwise, if you want to check out my tutorials, follow these instructions: I've created a few tutorials (see links that end with **.md** extension) and it's highly recommended that you go through them sequentially. The corresponding **.rmd**  files are the RMarkdown files I've used to create these tutorials (check them out to see how I've created these tutorials: click on one of them and click on **Raw** to see the script). The data used in the tutorials are in the **Data** directory. To everything from my github repository, click the green **Clone or download** button at the top right. 
+If you're new to R, follow the instructions below to install R and RStudio. Otherwise, if you want to check out my tutorials, follow these instructions: I've created a few tutorials (see links that end with **.md** extension) and it's highly recommended that you go through them sequentially. The corresponding **.rmd**  files are the RMarkdown files I've used to create these tutorials (check them out to see how I've created these tutorials: click on one of them and click on **Raw** to see the script). The data used in the tutorials are in the **Data** directory. To download everything from my github repository, click the green **Clone or download** button at the top right. 
 
 ### Tutorials
 

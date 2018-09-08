@@ -1,0 +1,73 @@
+---
+title: " "
+output: 
+    github_document
+---
+
+### https://github.com/hauselin/Rcode
+
+#### Source or load `summaryh()` function
+
+```{r, message=F, warning=F}
+source("https://raw.githubusercontent.com/hauselin/Rcode/master/summaryh.R")
+```
+
+#### Linear regression standard R output 
+
+```{r}
+model <- lm(mpg ~ drat, mtcars)
+summary(model)
+```
+
+#### Linear regression `summaryh()` output
+
+```{r}
+summaryh(model)
+```
+
+#### Linear regression `summaryh()` output: changing default output
+
+```{r}
+summaryh(model, decimal = 1)
+```
+
+#### Linear regression `summaryh()` output: changing default output
+
+```{r}
+summaryh(model, showTable = T)
+```
+
+#### Linear regression `summaryh()` output: show other effect sizes
+
+```{r}
+summaryh(model, showEffectSizesTable = T)
+```
+
+#### Correlation 
+
+```{r}
+summaryh(cor.test(mtcars$mpg, mtcars$cyl))
+```
+
+#### t-test
+
+```{r}
+summaryh(t.test(mpg ~ vs, mtcars))
+```
+
+#### ANOVA
+
+```{r}
+summaryh(aov(mpg ~ gear, mtcars), decimal = 1)
+```
+
+#### Multi-level/mixed effects model with lme4 and lmerTest
+
+```{r, message=F,warning=F}
+library(lme4); library(lmerTest) # load packages to fit mixed effects models
+model <- lmer(weight ~ Time * Diet  + (1 + Time | Chick), data = ChickWeight)
+summaryh(model)
+```
+
+### https://github.com/hauselin/Rcode
+### https://github.com/hauselin/RDataScience
